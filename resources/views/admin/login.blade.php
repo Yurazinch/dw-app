@@ -5,9 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>Авторизация | ИдёмВКино</title>
-  <!--<link rel="stylesheet" href="CSS/normalize.css">
-  <link rel="stylesheet" href="CSS/styles.css">-->
+  <title>Авторизация | ИдёмВКино</title>  
   @vite(['resources/css/styles-admin.css',
    'resources/css/normalize-admin.css',
    'resources/css/styles-admin.scss'
@@ -28,7 +26,8 @@
         <h2 class="login__title">Авторизация</h2>
       </header>
       <div class="login__wrapper">
-        <form class="login__form" action="http://f0769682.xsph.ru/authorization.php" method="POST" accept-charset="utf-8">
+        <form class="login__form" action="{{ route('admin.authenticate') }}" method="POST" accept-charset="utf-8">
+          @csrf
           <label class="login__label" for="email">
             E-mail
             <input class="login__input" type="email" placeholder="example@domain.xyz" name="email" required>
