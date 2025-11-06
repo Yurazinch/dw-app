@@ -1,59 +1,76 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# План к дипломному проекту #
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Вариант реализации: **Laravel App**.
 
-## About Laravel
+*Анализ проекта*
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+<u>Кинозал</u> - связан один со многими местами, сеансами, фильмами. 
+@param $hallId, [$row => [$place => 'standart' || 'vip' || 'disabled']]
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+<u>Место</u> - связано с билетом на время его действия.
+@param $ticketId, $sessionId, $busy (false || true).
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+<u>Фильм</u> - связан со многими сеансами, зрительным залом.
+@param $filmId, $name, $description, $time, $country
 
-## Learning Laravel
+<u>Сеанс</u> - связан с залом и фильмом, ценой. Ограничен временным отрезком. По завершению деактивируется.
+@param $sessionId, $hallId, $filmId, $date, $prise, $priseVip, $startTime, $stopTime
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+<u>Билет</u> - связан с сеансом, местом.
+@param $ticketId, $sessionId, $hall[$row][$place]
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+Для зрителя возможен выбор билета, остальные маршруты закрыты идентификацией.
 
-## Laravel Sponsors
+Для админиcтратора доступны все маршруты после авторизации.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+Вход на сайт - гостевой ./index.html : view (/).
 
-### Premium Partners
+Вход для администратора - ./admin/index.html : view (/admin) -> auth.
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+Формировать модель + контроллер + миграция Hall, Place, Film, Session, Ticket, User(Администратор).
 
-## Contributing
+Создание зрительского зала (auth) = созданию шаблона мест для сеансов. Заполняется в разметке (представлении), затем через $request передается и обрабатывается в таблицу в контроллере: колонки - ряды, значения в колонках - массив: № места => статус.
+Конфигурация зала задается из административной паннели.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Создание фильма (auth) = статическая запись в базе данных, которая связана с сеансами.
 
-## Code of Conduct
+При создании сеанса (auth) создается экземпляр зала, ссылка на фильм, дата, временной интервал, цены (обычная и vip).
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+При создании билета создается экземпляр сеанса, места и цена (в зависимости от статуса места).
 
-## Security Vulnerabilities
+## Создание зрительного зала
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+1. Заданные параметры ($rows => $places) отправляются (post) в контроллер Hall метод create. 
+2. В методе формируются ячейки (/row/{row}/num/{num}), заполняются значением $status => 'buying-scheme__chair_disabled' и сохраняются в database.
 
-## License
+## Редактирование зрительного зала
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Через $hallId контроллер Hall отправляет (get) матрицу зала (/row/{row}/num/{num}), в представлении формируется план зала, ячейкам присваивается class='buying-scheme__chair {{$status}}'.
+2. Admin устанавливает статус мест ('standart', 'vip'). Статус мест устанавливается в клиенте посредством js: функцией forEach обработчик события 'click' с проверкой статуса.
+3. При сохранении обновленная информация по $hallId контроллером Hall обновляется (метод update) новыми значениями $status ('buying-scheme__chair_enabled' или 'buying-scheme__chair_vip').
+
+## Добавление фильма
+
+1. Данные из формы методом post отправляются в контроллер Film метод create.
+2. Переменные $name, $description, $time, $country сохраняются в таблице films с уникальным $filmID.
+3. Постер через фасад Storage помещается в папку storage/app/public.
+4. Ссылка на файл постера $poster хранится в таблице $filmId.
+
+## Цены 
+1. Данные из формы методом post отправляются в контроллер Price метод create.
+2. $priceId связывается с $hallId.
+
+## Сетка сеансов
+1. Фильмы методом get из таблицы films контроллером Film добавляются в поле фильмов.
+2. *Реализацию добавления в сетку нужно продумать, пока не понятно*.
+
+## Открыть продажи
+
+1. Активация клиетнской части сайта. 
+2. *Так же нужно будет продумать реализацию*.
+
+## Клиентская часть 
+
+
+
+

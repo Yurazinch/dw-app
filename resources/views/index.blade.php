@@ -6,8 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ИдёмВКино</title>
-  <!--<link rel="stylesheet" href="{{ asset('css/normalize.css') }}">
-  <link rel="stylesheet" href="{{ asset('css/styles.css') }}">-->
   @vite(['resources/css/styles.css',
    'resources/css/normalize.css',
    'resources/css/styles.scss'
@@ -21,23 +19,23 @@
   </header>
   
   <nav class="page-nav">
-    <a class="page-nav__day page-nav__day_today" href="#">
-      <span class="page-nav__day-week">Пн</span><span class="page-nav__day-number">31</span>
+    <a class="page-nav__day page-nav__day_today page-nav__day_chosen" href="#">
+      <span class="page-nav__day-week"></span><span class="page-nav__day-number"></span>
     </a>
     <a class="page-nav__day" href="#">
-      <span class="page-nav__day-week">Вт</span><span class="page-nav__day-number">1</span>
-    </a>
-    <a class="page-nav__day page-nav__day_chosen" href="#">
-      <span class="page-nav__day-week">Ср</span><span class="page-nav__day-number">2</span>
+      <span class="page-nav__day-week"></span><span class="page-nav__day-number"></span>
     </a>
     <a class="page-nav__day" href="#">
-      <span class="page-nav__day-week">Чт</span><span class="page-nav__day-number">3</span>
+      <span class="page-nav__day-week"></span><span class="page-nav__day-number"></span>
     </a>
     <a class="page-nav__day" href="#">
-      <span class="page-nav__day-week">Пт</span><span class="page-nav__day-number">4</span>
+      <span class="page-nav__day-week"></span><span class="page-nav__day-number"></span>
     </a>
-    <a class="page-nav__day page-nav__day_weekend" href="#">
-      <span class="page-nav__day-week">Сб</span><span class="page-nav__day-number">5</span>
+    <a class="page-nav__day" href="#">
+      <span class="page-nav__day-week"></span><span class="page-nav__day-number"></span>
+    </a>
+    <a class="page-nav__day" href="#">
+      <span class="page-nav__day-week"></span><span class="page-nav__day-number"></span>
     </a>
     <a class="page-nav__day page-nav__day_next" href="#">
     </a>
@@ -47,7 +45,7 @@
     <section class="movie">
       <div class="movie__info">
         <div class="movie__poster">
-          <img class="movie__poster-image" alt="Звёздные войны постер" src="i/poster1.jpg">
+          <img class="movie__poster-image" alt="Звёздные войны постер" src="/storage/images/poster1.jpg">
         </div>
         <div class="movie__description">
           <h2 class="movie__title">Звёздные войны XXIII: Атака клонированных клонов</h2>
@@ -84,7 +82,7 @@
     <section class="movie">
       <div class="movie__info">      
         <div class="movie__poster">
-          <img class="movie__poster-image" alt="Альфа постер" src="i/poster2.jpg">
+          <img class="movie__poster-image" alt="Альфа постер" src="/storage/images/poster2.jpg">
         </div>
         <div class="movie__description">        
           <h2 class="movie__title">Альфа</h2>
@@ -120,7 +118,7 @@
     <section class="movie">
       <div class="movie__info">      
         <div class="movie__poster">
-          <img class="movie__poster-image" alt="Хищник постер" src="i/poster2.jpg">
+          <img class="movie__poster-image" alt="Хищник постер" src="/storage/images/poster2.jpg">
         </div>
         <div class="movie__description">        
           <h2 class="movie__title">Хищник</h2>
@@ -149,6 +147,6 @@
       </div>     
     </section>     
   </main>
-  
+  @vite('resources/js/datenavs.js')
 </body>
 </html>
