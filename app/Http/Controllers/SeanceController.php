@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Place;
+use App\Models\Seance;
 use Illuminate\Http\Request;
 
-class PlaceController extends Controller
+class SeanceController extends Controller
 {
     /**
      * Отобразить список ресурса.
@@ -20,7 +20,7 @@ class PlaceController extends Controller
      */
     public function create()
     {
-        //
+        return route('admin/addseance');
     }
 
     /**
@@ -34,7 +34,7 @@ class PlaceController extends Controller
     /**
      * Отобразить указанный ресурс.
      */
-    public function show(Place $place)
+    public function show(Seance $seance)
     {
         //
     }
@@ -42,7 +42,7 @@ class PlaceController extends Controller
     /**
      * Показать форму редактирования указанного ресурса.
      */
-    public function edit(Place $place)
+    public function edit(Seance $seance)
     {
         //
     }
@@ -50,7 +50,7 @@ class PlaceController extends Controller
     /**
      * Обновить указанный ресурс в хранилище.
      */
-    public function update(Request $request, Place $place)
+    public function update(Request $request, Seance $seance)
     {
         //
     }
@@ -58,7 +58,7 @@ class PlaceController extends Controller
     /**
      * Удалить указанный ресурс из хранилища.
      */
-    public function destroy(Place $place)
+    public function destroy(Seance $seance)
     {
         //
     }

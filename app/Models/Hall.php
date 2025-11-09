@@ -7,13 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 class Hall extends Model
 {
     protected $table = 'halls';
-    protected $fillable = [
-        'number',
-        'rows',
-        'placesrow',
-    ];
-    public function rows() 
+    protected $fillable = 'name';
+
+    public function places() 
     {
-        return $this->hasMany(Row::class, 'hall_id', 'id');
+        return $this->hasMany(Place::class);
+    }
+
+    public function seanes() 
+    {
+        return $this->hasMany(Seance::class);
     }
 }

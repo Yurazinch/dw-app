@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('rows', function (Blueprint $table) {
-            $table->id(); //primary key
-            $table->integer('hallId'); //foreign key
-            $table->integer('rows');
+        Schema::create('bookings', function (Blueprint $table) {
+            $table->id();
+            $table->integer('place_id');
+            $table->integer('seance_id');
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('rows');
+        Schema::dropIfExists('bookings');
     }
 };
