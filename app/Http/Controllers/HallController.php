@@ -10,10 +10,10 @@ class HallController extends Controller
     /**
      * Отобразить список ресурса.
      */
-    public function index()
+    public function index(): View
     {
-        $halls = Hall::get();
-        return route('admin/index', $halls);
+        $halls = Hall::all();
+        return route('admin.index', ['halls' => $halls]);
     }
 
     /**
@@ -21,7 +21,7 @@ class HallController extends Controller
      */
     public function create()
     {
-        return route('addhall');
+        //
     }
 
     /**
@@ -30,7 +30,7 @@ class HallController extends Controller
     public function store(Request $request)
     {
         $hall = new Hall;
-        $hall->name = $request->name;
+        $hall->name = $request->value;
         $hall->save;
         return redirect('admin/index');
     }

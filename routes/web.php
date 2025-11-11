@@ -20,12 +20,15 @@ Route::post('admin/index', [LoginController::class, 'authenticate'])->name('admi
 Route::get('admin/index', function ()
 {
     return view('admin/index');
-});
+})->name('admin.home');
 
-Route::get('admin/addhall', [HallController::class, 'create'])->name('createhall');
+Route::get('admin/addhall', function ()
+{
+    return view('admin/addhall');
+})->name('createhall');
 
 Route::post('admin/addhall', [HallController::class, 'store'])->name('addhall');
 
 Route::post('admin/removehall/{name}', [HallController::class, 'destroy'])->name('removehall');
 
-Route::get('admin/components.hall-create', [HallController::class, 'index'])->name('components.hall-create');
+Route::get('admin.index', [HallController::class, 'index']);

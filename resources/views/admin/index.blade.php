@@ -28,7 +28,7 @@
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Доступные залы:</p>
         <ul class="conf-step__list">
-          @if(!$halls)
+          @if(!isset($halls))
             <p class="conf-step__paragraph">Залы не добавлены!</p>
           @else
             @foreach($halls as $hall)
@@ -37,10 +37,8 @@
               </li>
             @endforeach   
           @endif     
-        </ul>
-        @auth
-        <a href="{{ route('createhall') }}"><button class="conf-step__button conf-step__button-accent">Создать зал</button></a>
-        @endauth
+        </ul>        
+        <a href="{{ route('createhall') }}"><button class="conf-step__button conf-step__button-accent">Создать зал</button></a>        
       </div>
     </section>
     
@@ -51,7 +49,7 @@
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Выберите зал для конфигурации:</p>
         <ul class="conf-step__selectors-box">
-          @if(!$halls)
+          @if(!isset($halls))
               <p class="conf-step__paragraph">Залы не добавлены!</p>
           @else
             @foreach($halls as $hall)

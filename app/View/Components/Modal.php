@@ -6,14 +6,15 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class HallCreate extends Component
+class Modal extends Component
 {
+    public string $string;
     /**
      * Create a new component instance.
      */
-    public function __construct(public array $halls)
+    public function __construct()
     {
-        
+        $this->string = 'Это строка';
     }
 
     /**
@@ -21,6 +22,6 @@ class HallCreate extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.hall-create');
+        return view('modal');
     }
 }
