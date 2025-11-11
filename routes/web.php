@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\HallController;
 
 Route::get('/', function () 
 {
@@ -20,3 +21,11 @@ Route::get('admin/index', function ()
 {
     return view('admin/index');
 });
+
+Route::get('admin/addhall', [HallController::class, 'create'])->name('createhall');
+
+Route::post('admin/addhall', [HallController::class, 'store'])->name('addhall');
+
+Route::post('admin/removehall/{name}', [HallController::class, 'destroy'])->name('removehall');
+
+Route::get('admin/components.hall-create', [HallController::class, 'index'])->name('components.hall-create');

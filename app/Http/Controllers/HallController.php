@@ -21,7 +21,7 @@ class HallController extends Controller
      */
     public function create()
     {
-        return route('admin/addhall');
+        return route('addhall');
     }
 
     /**
@@ -30,9 +30,7 @@ class HallController extends Controller
     public function store(Request $request)
     {
         $hall = new Hall;
-        $hall->number = $request->number;
-        $hall->rows = $request->rows;
-        $hall->placesrow = $request->placesrow;
+        $hall->name = $request->name;
         $hall->save;
         return redirect('admin/index');
     }

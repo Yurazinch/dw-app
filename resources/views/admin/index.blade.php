@@ -27,15 +27,10 @@
       </header>
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Доступные залы:</p>
-        <ul class="conf-step__list">
-          <li>Зал 1
-            <button class="conf-step__button conf-step__button-trash"></button>
-          </li>
-          <li>Зал 2
-            <button class="conf-step__button conf-step__button-trash"></button>
-          </li>
-        </ul>
-        <button class="conf-step__button conf-step__button-accent">Создать зал</button>
+        
+        @auth
+        <a href="{{ route('createhall') }}"><button class="conf-step__button conf-step__button-accent">Создать зал</button></a>
+        @endauth
       </div>
     </section>
     
