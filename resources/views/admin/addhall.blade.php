@@ -24,15 +24,15 @@
         </h2>
       </div>
       <div class="popup__wrapper">
-        <form action="{{ route('addhall') }}" method="post" accept-charset="utf-8">
+        <form action="/admin/hall/store" method="post" accept-charset="utf-8">
           @csrf
-          <label class="conf-step__label conf-step__label-fullsize" for="name">
+          <label class="conf-step__label conf-step__label-fullsize" for="add-hall">
             Название зала
-            <input class="conf-step__input" type="text" placeholder="Например, &laquo;Зал 1&raquo;" name="name" required>
+            <input id="add-hall" class="conf-step__input" type="text" placeholder="Например, &laquo;Зал 1&raquo;" name="name" autocomplete="off" required>
           </label>
           <div class="conf-step__buttons text-center">
             <input type="submit" value="Добавить зал" class="conf-step__button conf-step__button-accent" data-event="hall_add">
-            <button class="conf-step__button conf-step__button-regular" type="button">Отменить</button>
+            <a href="{{ route('admin.home') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>
           </div>
         </form>
       </div>

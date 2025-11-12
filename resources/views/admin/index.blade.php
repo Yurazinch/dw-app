@@ -32,13 +32,13 @@
             <p class="conf-step__paragraph">Залы не добавлены!</p>
           @else
             @foreach($halls as $hall)
-              <li> {{ $hall->name }} <a href="{{ route('removehall', ['name' => $hall->name]) }}">
+              <li> {{ $hall->name }} <a href="{{ route('hall.remove', ['name' => $hall->name]) }}">
                 <button class="conf-step__button conf-step__button-trash"></button></a>
               </li>
             @endforeach   
           @endif     
         </ul>        
-        <a href="{{ route('createhall') }}"><button class="conf-step__button conf-step__button-accent">Создать зал</button></a>        
+        <a href="{{ route('hall.create') }}"><button class="conf-step__button conf-step__button-accent">Создать зал</button></a>        
       </div>
     </section>
     

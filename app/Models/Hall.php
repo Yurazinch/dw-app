@@ -7,7 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Hall extends Model
 {
     protected $table = 'halls';
-    protected $fillable = ['id', 'name'];
+    
+    protected $fillable = ['name'];
 
     public function places() 
     {

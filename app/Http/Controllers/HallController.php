@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Hall;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Http\RedirectResponse;
 
 class HallController extends Controller
 {
@@ -13,7 +15,7 @@ class HallController extends Controller
     public function index(): View
     {
         $halls = Hall::all();
-        return route('admin.index', ['halls' => $halls]);
+        return route('admin.home', ['halls' => $halls]);
     }
 
     /**
@@ -21,18 +23,18 @@ class HallController extends Controller
      */
     public function create()
     {
-        //
+       return view('/admin/addhall');
     }
 
     /**
      * Сохранить вновь созданный ресурс в хранилище.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
         $hall = new Hall;
-        $hall->name = $request->value;
-        $hall->save;
-        return redirect('admin/index');
+        $hall->name = $request->name;     
+        $hall->save();
+        return redirect('/admin/home');
     }
 
     /**
