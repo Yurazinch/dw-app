@@ -25,19 +25,12 @@
       <header class="conf-step__header conf-step__header_opened">
         <h2 class="conf-step__title">Управление залами</h2>
       </header>
+      
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Доступные залы:</p>
         <ul class="conf-step__list">
-          @if(!isset($halls))
-            <p class="conf-step__paragraph">Залы не добавлены!</p>
-          @else
-            @foreach($halls as $hall)
-              <li> {{ $hall->name }} <a href="{{ route('hall.remove', ['name' => $hall->name]) }}">
-                <button class="conf-step__button conf-step__button-trash"></button></a>
-              </li>
-            @endforeach   
-          @endif     
-        </ul>        
+          <x-modal :$halls/>
+        </ul>             
         <a href="{{ route('hall.create') }}"><button class="conf-step__button conf-step__button-accent">Создать зал</button></a>        
       </div>
     </section>
@@ -49,11 +42,11 @@
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Выберите зал для конфигурации:</p>
         <ul class="conf-step__selectors-box">
-          @if(!isset($halls))
+          @if(count($halls) === 0)
               <p class="conf-step__paragraph">Залы не добавлены!</p>
           @else
             @foreach($halls as $hall)
-              <li><input type="radio" class="conf-step__radio" name="chairs-hall" value="{{ $hall->name }}"><span class="conf-step__selector">Зал 1</span></li>
+              <li><input type="radio" class="conf-step__radio" name="chairs-hall" value="{{ $hall->name }}"><span class="conf-step__selector">{{ $hall->name }}</span></li>
             @endforeach
           @endif
         </ul>

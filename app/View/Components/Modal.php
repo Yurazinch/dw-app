@@ -7,21 +7,21 @@ use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class Modal extends Component
-{
-    public string $string;
+{   
+    public $halls; 
     /**
-     * Create a new component instance.
+     * Создайте новый экземпляр компонента.
      */
-    public function __construct()
+    public function __construct($halls)
     {
-        $this->string = 'Это строка';
+        $this->halls = $halls;
     }
 
     /**
-     * Get the view / contents that represent the component.
+     * Получить представление/содержимое, представляющее компонент.
      */
-    public function render(): View|Closure|string
+    public function render(): View|Closure
     {
-        return view('modal');
+        return view('components.modal');
     }
 }

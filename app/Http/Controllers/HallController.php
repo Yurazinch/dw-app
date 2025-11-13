@@ -6,6 +6,8 @@ use App\Models\Hall;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
+use Illuminate\Database\Eloquent\Collection;
 
 class HallController extends Controller
 {
@@ -14,8 +16,8 @@ class HallController extends Controller
      */
     public function index(): View
     {
-        $halls = Hall::all();
-        return route('admin.home', ['halls' => $halls]);
+        $halls = Hall::get();
+        return view('admin/index', ['halls' => $halls]);
     }
 
     /**
@@ -31,10 +33,14 @@ class HallController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+        
         $hall = new Hall;
         $hall->name = $request->name;     
         $hall->save();
-        return redirect('/admin/home');
+        return redirect()->route('hall.index');
     }
 
     /**
@@ -64,8 +70,9 @@ class HallController extends Controller
     /**
      * Удалить указанный ресурс из хранилища.
      */
-    public function destroy(Hall $hall)
+    public function destroy(Hall $hall, $name)
     {
-        //
+        $hall = Hall::where('name', $name)->delete();
+        return redirect()->route('hall.index');
     }
 }
