@@ -5,7 +5,7 @@
         @else
             @foreach($halls as $hall)
                 <li> {{ $hall->name }} <a href="{{ route('hall.toremove', ['name' => $hall->name]) }}">
-                <button class="conf-step__button conf-step__button-trash"></button></a>
+                    <button class="conf-step__button conf-step__button-trash"></button></a>
                 </li>
             @endforeach   
         @endif

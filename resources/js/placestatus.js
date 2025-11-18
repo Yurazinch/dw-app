@@ -1,4 +1,15 @@
 const places = document.querySelector('.conf-step__hall-wrapper');
+const selectorsBox = document.querySelectorAll('.conf-step__radio');
+const hallSizeInputs = document.querySelectorAll('.conf-step__input-size');
+const hallPriceInputs = document.querySelectorAll('.conf-step__input-price');
+const hallEl = document.querySelector('.conf-step__hall-wrapper');
+const hallReset = document.querySelector('.conf-step__button-regular');
+const planButton = document.querySelector('#chairs-plan');
+const priceButton = document.querySelector('#chairs-price');
+let selectorValue = [];
+let chairsPlan = [];
+let priceValue = [];
+
 places.addEventListener('click', (e) => {	
 	if(e.target.classList.contains('conf-step__chair_disabled')) {
 		e.target.classList.replace('conf-step__chair_disabled', 'conf-step__chair_standart');		
@@ -8,3 +19,105 @@ places.addEventListener('click', (e) => {
 		e.target.classList.replace('conf-step__chair_vip', 'conf-step__chair_disabled');
 	}
 });
+
+selectorsBox.forEach(box => {
+	box.addEventListener('click', () => {
+		let index = Array.from(selectorsBox).findIndex(box => box.classList.contains('checked'));
+		console.log(index);
+		if(index !== -1) {
+			selectorsBox[index].classList.remove('checked');
+		}
+		box.classList.add('checked');
+	});
+});
+
+hallSizeInputs.forEach(item => {
+	item.addEventListener('change', () => {
+		let name = item.name;
+		let value = item.value;
+		selectorValue[name] = value;
+		if(selectorValue['rows'] > 0 && selectorValue['chairs'] > 0) {
+			hallRender();
+		}
+	});	
+});
+
+priceButton.addEventListener('click', () => {
+	let index = Array.from(selectorsBox).findIndex(box => box.classList.contains('checked'));
+	if((index ^ 0) === index) {
+		chairsPlan.push({
+			зал: selectorsBox[index].value
+		});
+	} else {
+		alert('Нужно выбрать зал!');
+	}
+	priceValue['зал'] = selectorsBox[index].value;
+	hallPriceInputs.forEach(item => {
+		let name = item.name;
+		let value = item.value;
+		if(item.value > 0) {
+			priceValue[name] = value;		
+		} else {
+			alert('Не указана цена!');
+		}
+	});
+});
+
+hallReset.addEventListener('click', () => {
+	selectorValue = [];
+	hallSizeInputs.forEach(el => el.removeAttribute('disabled'));
+});
+
+planButton.addEventListener('click', () => {
+	let index = Array.from(selectorsBox).findIndex(box => box.classList.contains('checked'));
+	if((index ^ 0) === index) {
+		chairsPlan.push({
+			зал: selectorsBox[index].value
+		});
+	} else {
+		alert('Нужно выбрать зал!');
+	}
+	hallPlan();
+});
+
+function hallRender() {
+	for(let i = 0; i < selectorValue['rows']; i++) {
+		let row = document.createElement('div');
+		row.classList.add('conf-step__row');
+		row.setAttribute('number', i+1);
+		hallEl.insertAdjacentElement('beforeend', row);
+		for(let j = 0; j < selectorValue['chairs']; j++) {
+			let chair = document.createElement('span');
+			chair.classList.add('conf-step__chair');
+			chair.classList.add('conf-step__chair_disabled');
+			chair.setAttribute('number', j+1);
+			row.insertAdjacentElement('beforeend', chair);
+		}
+	}
+	if(places.children.length > 0) {
+		hallSizeInputs.forEach(el => el.setAttribute('disabled', 'disabled'));
+	}
+}
+
+function hallPlan() {	
+	Array.from(places.children).forEach(row => {
+		let rn = row.getAttribute('number');			
+		Array.from(row.children).forEach(chair => {
+			let chn = chair.getAttribute('number');
+			let chs = '';
+			if(chair.classList.contains('conf-step__chair_disabled')) {
+				chs = 'disabled';
+			} else if (chair.classList.contains('conf-step__chair_standart')) {
+				chs = 'standart';
+			} else if (chair.classList.contains('conf-step__chair_vip')) {
+				chs = 'vip';
+			}
+			chairsPlan.push({
+				ряд: rn,
+				место: chn,
+				тип: chs,
+				цена: 0
+			})						
+		});
+	});
+}
