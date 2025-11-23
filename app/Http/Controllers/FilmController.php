@@ -4,31 +4,33 @@ namespace App\Http\Controllers;
 
 use App\Models\Film;
 use Illuminate\Http\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 
 class FilmController extends Controller
 {
-    /**
-     * Отобразить список ресурса.
-     */
-    public function index()
-    {
-        //
-    }
-
     /**
      * Показать форму создания нового ресурса.
      */
     public function create()
     {
-        return route('admin/addfilm');
+        return view('/admin/addfilm');
     }
 
     /**
      * Сохранить вновь созданный ресурс в хранилище.
      */
-    public function store(Request $request)
+    public function store(Request $request): RedirectResponse
     {
-        //
+        $film = new Film;
+        $film->name = $request->name;
+        $film->description = $request->description;
+        $film->duration = $request->duration;        
+        $film->poster = $request->file('poster')->store('images', 'public');
+        $film->save();
+
+        return redirect()->route('admin.lists');
+        
     }
 
     /**
@@ -58,8 +60,11 @@ class FilmController extends Controller
     /**
      * Удалить указанный ресурс из хранилища.
      */
-    public function destroy(Film $film)
+    public function destroy(Film $film, $name)
     {
-        //
+        $poster = Film::where('name', $name)->pluck('poster');
+        Storage::delete('$poster');
+        $film = Film::where('name', $name)->delete();
+        return redirect()->route('admin.lists');
     }
 }

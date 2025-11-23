@@ -8,18 +8,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Database\Eloquent\Collection;
+use App\Events\HallCreated;
 
 class HallController extends Controller
 {
-    /**
-     * Отобразить список ресурса.
-     */
-    public function index(): View
-    {
-        $halls = Hall::get();
-        return view('admin/index', ['halls' => $halls]);
-    }
-
     /**
      * Показать форму создания нового ресурса.
      */
@@ -40,7 +32,7 @@ class HallController extends Controller
         $hall = new Hall;
         $hall->name = $request->name;     
         $hall->save();
-        return redirect()->route('hall.index');
+        return redirect()->route('admin.home');
     }
 
     /**
@@ -73,6 +65,6 @@ class HallController extends Controller
     public function destroy(Hall $hall, $name)
     {
         $hall = Hall::where('name', $name)->delete();
-        return redirect()->route('hall.index');
+        return redirect()->route('admin.lists');
     }
 }

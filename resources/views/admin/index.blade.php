@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ИдёмВКино</title>
+  @routes
   @vite(['resources/css/styles-admin.css',
    'resources/css/normalize-admin.css',
    'resources/css/styles-admin.scss'
@@ -28,7 +29,7 @@
       
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Доступные залы:</p>
-        <x-modal :$halls/>
+        <x-modal :$halls />
         <a href="{{ route('hall.create') }}"><button class="conf-step__button conf-step__button-accent">Создать зал</button></a>        
       </div>
     </section>
@@ -95,39 +96,10 @@
       </header>
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">
-          <button class="conf-step__button conf-step__button-accent">Добавить фильм</button>
+          <a href="{{ route('film.create') }}"><button class="conf-step__button conf-step__button-accent">Добавить фильм</button></a>
         </p>
-        <div class="conf-step__movies">
-          <div class="conf-step__movie">
-            <img class="conf-step__movie-poster" alt="poster" src="/storage/images/poster-admin.png">
-            <h3 class="conf-step__movie-title">Звёздные войны XXIII: Атака клонированных клонов</h3>
-            <p class="conf-step__movie-duration">130 минут</p>
-          </div>
-          
-          <div class="conf-step__movie">
-            <img class="conf-step__movie-poster" alt="poster" src="/storage/images/poster-admin.png">
-            <h3 class="conf-step__movie-title">Миссия выполнима</h3>
-            <p class="conf-step__movie-duration">120 минут</p>
-          </div>
-          
-          <div class="conf-step__movie">
-            <img class="conf-step__movie-poster" alt="poster" src="/storage/images/poster-admin.png">
-            <h3 class="conf-step__movie-title">Серая пантера</h3>
-            <p class="conf-step__movie-duration">90 минут</p>
-          </div>
-          
-          <div class="conf-step__movie">
-            <img class="conf-step__movie-poster" alt="poster" src="/storage/images/poster-admin.png">
-            <h3 class="conf-step__movie-title">Движение вбок</h3>
-            <p class="conf-step__movie-duration">95 минут</p>
-          </div>   
-          
-          <div class="conf-step__movie">
-            <img class="conf-step__movie-poster" alt="poster" src="/storage/images/poster-admin.png">
-            <h3 class="conf-step__movie-title">Кот Да Винчи</h3>
-            <p class="conf-step__movie-duration">100 минут</p>
-          </div>            
-        </div>
+
+        <x-film :$films />
         
         <div class="conf-step__seances">
           <div class="conf-step__seances-hall">

@@ -6,8 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ИдёмВКино</title>
-  <link rel="stylesheet" href="CSS/normalize.css">
-  <link rel="stylesheet" href="CSS/styles.css">
+  @vite(['resources/css/styles-admin.css',
+   'resources/css/normalize-admin.css',
+   'resources/css/styles-admin.scss'
+  ])
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
 </head>
 
@@ -19,16 +21,15 @@
       <div class="popup__header">
         <h2 class="popup__title">
           Удаление фильма
-          <a class="popup__dismiss" href="#"><img src="i/close.png" alt="Закрыть"></a>
+          <a class="popup__dismiss" href="{{ route('admin.lists') }}"><img src="/storage/images/close-admin.png" alt="Закрыть"></a>
         </h2>
       </div>
       <div class="popup__wrapper">
-        <form action="delete_hall" method="post" accept-charset="utf-8">
-          <p class="conf-step__paragraph">Вы действительно хотите удалить фильм <span>"Название фильма"</span>?</p>
-          <!-- В span будет подставляться название фильма -->
+        <form action="{{ route('film.remove', ['name' => $name])}}" method="get" accept-charset="utf-8">
+          <p class="conf-step__paragraph">Вы действительно хотите удалить фильм <span>"{{ $name }}"</span>?</p>
           <div class="conf-step__buttons text-center">
             <input type="submit" value="Удалить" class="conf-step__button conf-step__button-accent">
-            <button class="conf-step__button conf-step__button-regular" type="button">Отменить</button>
+            <a href="{{ route('admin.lists') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>
           </div>
         </form>
       </div>

@@ -9,6 +9,7 @@ use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
+use App\Models\Hall;
 
 class HallCreated
 {
@@ -17,7 +18,7 @@ class HallCreated
     /**
      * Создайте новый экземпляр события.
      */
-    public function __construct(public Hall $hall)
+    public function __construct()
     {
         
     }

@@ -21,6 +21,8 @@ class HallCreatedListener
      */
     public function handle(HallCreated $event): void
     {
-        /*return redirect(view(...));*/
+        function () {
+            return route('film.index');
+        };
     }
 }

@@ -2,7 +2,6 @@ const places = document.querySelector('.conf-step__hall-wrapper');
 const selectorsBox = document.querySelectorAll('.conf-step__radio');
 const hallSizeInputs = document.querySelectorAll('.conf-step__input-size');
 const hallPriceInputs = document.querySelectorAll('.conf-step__input-price');
-const hallEl = document.querySelector('.conf-step__hall-wrapper');
 const hallReset = document.querySelector('.conf-step__button-regular');
 const planButton = document.querySelector('#chairs-plan');
 const priceButton = document.querySelector('#chairs-price');
@@ -65,7 +64,11 @@ priceButton.addEventListener('click', () => {
 
 hallReset.addEventListener('click', () => {
 	selectorValue = [];
-	hallSizeInputs.forEach(el => el.removeAttribute('disabled'));
+	places.innerHTML = '';
+	hallSizeInputs.forEach(el => {
+		el.value = '';
+		el.removeAttribute('disabled');
+	});
 });
 
 planButton.addEventListener('click', () => {
@@ -85,7 +88,7 @@ function hallRender() {
 		let row = document.createElement('div');
 		row.classList.add('conf-step__row');
 		row.setAttribute('number', i+1);
-		hallEl.insertAdjacentElement('beforeend', row);
+		places.insertAdjacentElement('beforeend', row);
 		for(let j = 0; j < selectorValue['chairs']; j++) {
 			let chair = document.createElement('span');
 			chair.classList.add('conf-step__chair');
