@@ -4,7 +4,7 @@
             <p class="conf-step__paragraph">Залы не добавлены!</p>
         @else
             @foreach($halls as $hall)
-                <li><input type="radio" class="conf-step__radio" name="chairs-hall" value="{{ $hall->name }}">
+                <li wire:key="{{ $hall->id }}"><input type="radio" class="conf-step__radio" name="chairs-hall" value="{{ $hall->name }}">
                 <span class="conf-step__selector">{{ $hall->name }}</span></li>
             @endforeach
         @endif

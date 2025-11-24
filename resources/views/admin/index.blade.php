@@ -29,7 +29,7 @@
       
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Доступные залы:</p>
-        <x-modal :$halls />
+        <livewire:hall-list :halls="$halls" />
         <a href="{{ route('hall.create') }}"><button class="conf-step__button conf-step__button-accent">Создать зал</button></a>        
       </div>
     </section>
@@ -40,7 +40,7 @@
       </header>
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Выберите зал для конфигурации:</p>
-        <x-hithall :$halls/>
+        <livewire:hall-button :halls="$halls" />
         <p class="conf-step__paragraph">Укажите количество рядов и максимальное количество кресел в ряду:</p>
         <div class="conf-step__legend">
           <label class="conf-step__label">Рядов, шт<input type="text" name="rows" class="conf-step__input conf-step__input-size" placeholder="10" ></label>
@@ -72,7 +72,7 @@
       </header>
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Выберите зал для конфигурации:</p>
-        <x-hithall :$halls/>          
+        <livewire:hall-button :halls="$halls" />          
         <p class="conf-step__paragraph">Установите цены для типов кресел:</p>
           <div class="conf-step__legend">
             <label class="conf-step__label">Цена, рублей<input type="text" name="standart" class="conf-step__input conf-step__input-price" placeholder="0" ></label>
@@ -98,40 +98,9 @@
         <p class="conf-step__paragraph">
           <a href="{{ route('film.create') }}"><button class="conf-step__button conf-step__button-accent">Добавить фильм</button></a>
         </p>
-
-        <x-film :$films />
-        
+        <livewire:film-list :films="$films" />        
         <div class="conf-step__seances">
-          <div class="conf-step__seances-hall">
-            <h3 class="conf-step__seances-title">Зал 1</h3>
-            <div class="conf-step__seances-timeline">
-              <div class="conf-step__seances-movie" style="width: 60px; background-color: rgb(133, 255, 137); left: 0;">
-                <p class="conf-step__seances-movie-title">Миссия выполнима</p>
-                <p class="conf-step__seances-movie-start">00:00</p>
-              </div>
-              <div class="conf-step__seances-movie" style="width: 60px; background-color: rgb(133, 255, 137); left: 360px;">
-                <p class="conf-step__seances-movie-title">Миссия выполнима</p>
-                <p class="conf-step__seances-movie-start">12:00</p>
-              </div>
-              <div class="conf-step__seances-movie" style="width: 65px; background-color: rgb(202, 255, 133); left: 420px;">
-                <p class="conf-step__seances-movie-title">Звёздные войны XXIII: Атака клонированных клонов</p>
-                <p class="conf-step__seances-movie-start">14:00</p>
-              </div>              
-            </div>
-          </div>
-          <div class="conf-step__seances-hall">
-            <h3 class="conf-step__seances-title">Зал 2</h3>
-            <div class="conf-step__seances-timeline">
-              <div class="conf-step__seances-movie" style="width: 65px; background-color: rgb(202, 255, 133); left: 595px;">
-                <p class="conf-step__seances-movie-title">Звёздные войны XXIII: Атака клонированных клонов</p>
-                <p class="conf-step__seances-movie-start">19:50</p>
-              </div>
-              <div class="conf-step__seances-movie" style="width: 60px; background-color: rgb(133, 255, 137); left: 660px;">
-                <p class="conf-step__seances-movie-title">Миссия выполнима</p>
-                <p class="conf-step__seances-movie-start">22:00</p>
-              </div>              
-            </div>
-          </div>
+          <livewire:time-line :halls="$halls" />
         </div>
         
         <fieldset class="conf-step__buttons text-center">
