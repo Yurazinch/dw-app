@@ -1,8 +1,23 @@
-<div class="conf-step__seances-hall">
-    @foreach($halls as $hall)
-        <h3 class="conf-step__seances-title">{{ $hall->name }}</h3>
-        <div class="conf-step__seances-timeline">
-                    
-        </div>
-    @endforeach
+<div>
+    @if(count($halls) === 0)
+        <p class="conf-step__paragraph">Залы не добавлены!</p>
+    @else
+        @foreach($halls as $hall)
+            <div wire:key="{{ $hall->id }}" class="conf-step__seances-hall">
+                <h3 class="conf-step__seances-title">{{ $hall->name }}</h3>
+                <div class="conf-step__seances-timeline">
+                    @foreach($timeline as $key => $value)                                       
+                        <div wire:key="{{ $key }}" class="conf-step__seances-movie" style="width: 85px; background-color: rgb(133, 255, 137); left: {{ 90*$key }}px;">
+                            @foreach($seances as $seance)
+                                @if($hall->id === $seance->hall_id && $seance->start === $value)                                
+                                    <p class="conf-step__seances-movie-title">{{ $seance->film_id }}</p>
+                                @endif
+                            @endforeach
+                            <p class="conf-step__seances-movie-start">{{ $value }}</p>
+                        </div>                        
+                    @endforeach
+                </div>
+            </div>        
+        @endforeach
+    @endif
 </div>

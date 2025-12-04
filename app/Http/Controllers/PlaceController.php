@@ -12,15 +12,7 @@ class PlaceController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Показать форму создания нового ресурса.
-     */
-    public function create()
-    {
-        //
+        return Place::get();
     }
 
     /**
@@ -28,7 +20,22 @@ class PlaceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'hall_id' => 'required|int',
+            'row' => 'required|int',
+            'place' => 'required|int',
+            'status' => 'required|string|max:225',
+            'price' => 'required|decimal|nullable',
+        ]);
+        
+        $place = new Place;
+        $place->hall_id = $validated->hall_id;
+        $place->row = $validated->row;
+        $place->place = $validated->place;
+        $place->status = $validated->status;
+        $place->price = $validated->price;
+        $place->save();
+        return redirect()->route('admin.lists');
     }
 
     /**
@@ -36,23 +43,16 @@ class PlaceController extends Controller
      */
     public function show(Place $place)
     {
-        //
-    }
-
-    /**
-     * Показать форму редактирования указанного ресурса.
-     */
-    public function edit(Place $place)
-    {
-        //
+        return Place::findOrFail('hall_id')->get();
     }
 
     /**
      * Обновить указанный ресурс в хранилище.
      */
-    public function update(Request $request, Place $place)
+    public function update(PlaceRequest $request, Place $place)
     {
-        //
+        $place->fill($request->validated());
+        return $place->save();
     }
 
     /**
@@ -60,6 +60,9 @@ class PlaceController extends Controller
      */
     public function destroy(Place $place)
     {
-        //
+        if($place->delete()) {
+            return response(null, response::HTTP_NO_CONTENT);
+        }
+        return null;
     }
 }

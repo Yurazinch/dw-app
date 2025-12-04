@@ -6,7 +6,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HallController;
 use App\Http\Controllers\FilmController;
-use App\Livewire\Film;
+use App\Http\Controllers\SeanceCreateController;
+use App\Http\Controllers\SeanceController;
 
 Route::get('/welcome', function() {
     return view('/welcome');
@@ -41,3 +42,15 @@ Route::get('/admin/film/{name}', function($name) {
 })->name('film.toremove');
 
 Route::get('/admin/film/remove/{name}', [FilmController::class, 'destroy'])->name('film.remove');
+
+Route::get('/admin/seance/create', [SeanceCreateController::class, 'createseance']);
+
+Route::post('/admin/seance/store', [SeanceController::class, 'store'])->name('seance.store');
+
+Route::get('/admin/seance/show/{id}', [SeanceController::class, 'show'])->name('seance.show');
+
+Route::get('/admin/seance/{seance}', function($seance) {
+    return view('admin/removeseance', ['id' => $id]);
+})->name('seance.toremove');
+
+Route::get('/admin/seance/remove/{id}', [SeanceController::class, 'destroy'])->name('seance.remove');

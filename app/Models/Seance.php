@@ -7,11 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Seance extends Model
 {
     protected $table = 'seances';
+    
     protected $fillable = [
         'hall_id',
         'film_id',
         'start',
-        'finish',
+    ]; 
+    
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     public function halls() 

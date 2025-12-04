@@ -30,9 +30,9 @@ class HallController extends Controller
         ]);
         
         $hall = new Hall;
-        $hall->name = $request->name;     
+        $hall->name = $validated->name;     
         $hall->save();
-        return redirect()->route('admin.home');
+        return redirect()->route('admin.lists');
     }
 
     /**

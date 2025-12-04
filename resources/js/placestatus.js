@@ -5,6 +5,8 @@ const hallPriceInputs = document.querySelectorAll('.conf-step__input-price');
 const hallReset = document.querySelector('.conf-step__button-regular');
 const planButton = document.querySelector('#chairs-plan');
 const priceButton = document.querySelector('#chairs-price');
+const filmBoxes = document.querySelector('.conf-step__movies');
+const timeLines = document.querySelectorAll('.conf-step__seances-hall');
 let selectorValue = [];
 let chairsPlan = [];
 let priceValue = [];
@@ -124,3 +126,29 @@ function hallPlan() {
 		});
 	});
 }
+
+Array.from(filmBoxes.children).forEach(filmBox => filmBox.addEventListener('dragstart', (e) => {
+	e.dataTransfer.setData('text/plain', filmBox.children[2].textContent);
+}));
+
+Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('dragover', (e) => e.preventDefault()));
+
+//const dataBox = [];
+
+Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop',(e) => {
+	/*const film = e.dataTransfer.getData('text');
+	const hall = e.target.previousElementSibling.textContent;
+	const draggableElement = document.getElementById('id');
+	dataBox['filmName'] = film;
+	dataBox['hallName'] = hall;*/
+	window.location.href = '/admin/seance/create';
+	/*fetch('/api/seances', {
+		method: 'POST',
+		headers: {'Content-Type': 'application/json'},
+		body: JSON.stringify({ data: dataBox })
+	})
+		.then(response => response.json())
+		.then(data => {console.log('Success:', data);
+	});	*/
+	e.dataTransfer.clearData();
+}));

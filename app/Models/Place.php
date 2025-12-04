@@ -7,12 +7,18 @@ use Illuminate\Database\Eloquent\Model;
 class Place extends Model
 {
     protected $table = 'places';
+
     protected $fillable = [
         'hall_Id',
         'place',
         'row',
         'status',
         'price',
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at',
     ];
 
     public function halls() 

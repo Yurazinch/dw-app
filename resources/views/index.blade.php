@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>ИдёмВКино</title>
-  @routes
   @vite(['resources/css/styles.css',
    'resources/css/normalize.css',
    'resources/css/styles.scss'

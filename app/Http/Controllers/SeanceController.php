@@ -3,56 +3,49 @@
 namespace App\Http\Controllers;
 
 use App\Models\Seance;
+use App\Models\Hall;
+use App\Models\Film;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;;
 
 class SeanceController extends Controller
 {
-    /**
-     * Отобразить список ресурса.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Показать форму создания нового ресурса.
-     */
-    public function create()
-    {
-        return route('admin/addseance');
-    }
-
     /**
      * Сохранить вновь созданный ресурс в хранилище.
      */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'hall' => 'required|string|min:3|max:225',
+            'film' => 'required|string|min:3|max:225',
+            'start_time' => ['required', Rule::date()->format("H:i")],
+        ]);
+
+        $seance = new Seance;
+        $seance->hall_id = Hall::where('name', $validated['hall'])->value('id');
+        $seance->film_id = Film::where('name', $validated['film'])->value('id');
+        $seance->start = $validated['start_time'];
+        $seance->save();
+        
+        return redirect()->route('admin.lists');
     }
 
     /**
      * Отобразить указанный ресурс.
      */
-    public function show(Seance $seance)
+    public function show($id)
     {
-        //
+        return Seance::findOrFail($id);
     }
 
-    /**
-     * Показать форму редактирования указанного ресурса.
-     */
-    public function edit(Seance $seance)
-    {
-        //
-    }
 
     /**
      * Обновить указанный ресурс в хранилище.
      */
-    public function update(Request $request, Seance $seance)
+    public function update(SeanceRequest $request, Seance $seance)
     {
-        //
+        $seance->fill($request->validate());
+        return $seance->save();
     }
 
     /**
@@ -60,6 +53,9 @@ class SeanceController extends Controller
      */
     public function destroy(Seance $seance)
     {
-        //
+        if($seance->delete()) {
+            return response(null, 404);
+        }
+        return null;
     }
 }

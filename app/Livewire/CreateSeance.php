@@ -3,17 +3,15 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use Livewire\Attributes\Reactive;
-use Livewire\Attributes\Validate;
+use App\Models\Hall;
+use App\Models\Film;
+use App\Models\Seance;
 
-class TimeLine extends Component
+class CreateSeance extends Component
 {
     public $halls;
-
     public $films;
-   
     public $seances;
-
     public array $timeline = [ 
         '08:00', 
         '10:00', 
@@ -24,9 +22,9 @@ class TimeLine extends Component
         '20:00',
         '22:00', 
     ];
-
+    
     public function render()
     {
-        return view('livewire.time-line');
+        return view('livewire.create-seance');
     }
 }
