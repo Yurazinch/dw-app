@@ -3,6 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use App\Models\Seance;
 
 class Film extends Model
 {
@@ -15,8 +17,8 @@ class Film extends Model
         'poster',
     ];
 
-    public function seances() 
+    public function seances(): HasMany
     {
-        return $this->hasMahy(Seance::class);
+        return $this->hasMany(Seance::class);
     }
 }

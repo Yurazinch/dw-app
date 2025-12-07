@@ -21,7 +21,7 @@
         Время начала
             <select class="conf-step__input" name="start_time" required>
                 @foreach($timeline as $key => $value)
-                <option wire:key="{{ $key }}" type="time" wire:model="seance">{{ $value }}</option>
+                    <option wire:key="{{ $key }}" type="time" wire:model="seance">{{ $value }}</option>
                 @endforeach
             </select>
             <!--<input id="start" class="conf-step__input" type="time" value="08:00" name="start_time" wire:model="seance" required>-->

@@ -3,6 +3,9 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Models\Hall;
+use App\Models\Booking;
 
 class Place extends Model
 {
@@ -21,13 +24,13 @@ class Place extends Model
         'updated_at',
     ];
 
-    public function halls() 
+    public function halls(): BelongsTo
     {
-        return $this->belongsTo(Hall::class, 'hall_id', 'id');
+        return $this->belongsTo(Hall::class);
     }
 
-    public function seances() 
+    public function boockings(): BelongsTo
     {
-        return $this->belongsTo(Seance::class, 'seance_id', 'id');
+        return $this->belogsTo(Boocking::class);
     }
 }

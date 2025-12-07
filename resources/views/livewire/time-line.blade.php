@@ -10,7 +10,7 @@
                         <div wire:key="{{ $key }}" class="conf-step__seances-movie" style="width: 85px; background-color: rgb(133, 255, 137); left: {{ 90*$key }}px;">
                             @foreach($seances as $seance)
                                 @if($hall->id === $seance->hall_id && $seance->start === $value)                                
-                                    <p class="conf-step__seances-movie-title">{{ $seance->film_id }}</p>
+                                    <p class="conf-step__seances-movie-title">{{ $seance->film->name }}</p>
                                 @endif
                             @endforeach
                             <p class="conf-step__seances-movie-start">{{ $value }}</p>

@@ -3,6 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+use App\Models\Place;
+use App\Models\Seance;
 
 class Booking extends Model
 {
@@ -12,13 +16,13 @@ class Booking extends Model
         'seance_id',
     ];
 
-    public function places() 
+    public function places(): HasMany
     {
-        return $this->hasMany(Place::class);
+        return $this->hasMany(Place::class, 'place_id');
     }
 
-    public function seances() 
+    public function seances(): HasOne
     {
-        return $this->hasOne(Seance::class);
+        return $this->hasOne(Seance::class, 'seance_id');
     }
 }

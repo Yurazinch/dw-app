@@ -99,7 +99,7 @@
         </p>
         <livewire:film-list :films="$films" />        
         <div class="conf-step__seances">
-          <livewire:time-line :$halls :$seances :$films/>
+          <livewire:time-line :$halls :$seances/>
         </div>
         
         <fieldset class="conf-step__buttons text-center">

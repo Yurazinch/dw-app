@@ -146,7 +146,7 @@ Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop',(e) =
 		method: 'POST',
 		headers: {'Content-Type': 'application/json'},
 		body: JSON.stringify({ data: dataBox })
-	})
+		})
 		.then(response => response.json())
 		.then(data => {console.log('Success:', data);
 	});	*/
