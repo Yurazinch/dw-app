@@ -6,7 +6,7 @@ const hallReset = document.querySelector('.conf-step__button-regular');
 const planButton = document.querySelector('#chairs-plan');
 const priceButton = document.querySelector('#chairs-price');
 const filmBoxes = document.querySelector('.conf-step__movies');
-const timeLines = document.querySelectorAll('.conf-step__seances-hall');
+const timeLines = document.querySelectorAll('.conf-step__seances-timeline');
 let selectorValue = [];
 let chairsPlan = [];
 let priceValue = [];
@@ -135,20 +135,26 @@ Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('dragover', 
 
 //const dataBox = [];
 
-Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop',(e) => {
-	/*const film = e.dataTransfer.getData('text');
-	const hall = e.target.previousElementSibling.textContent;
-	const draggableElement = document.getElementById('id');
-	dataBox['filmName'] = film;
-	dataBox['hallName'] = hall;*/
-	window.location.href = '/admin/seance/create';
-	/*fetch('/api/seances', {
-		method: 'POST',
-		headers: {'Content-Type': 'application/json'},
-		body: JSON.stringify({ data: dataBox })
-		})
-		.then(response => response.json())
-		.then(data => {console.log('Success:', data);
-	});	*/
+Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) => {
+	const film = e.dataTransfer.getData('text');
+	const targetEl = Array.from(timeLine.children).filter(el => el === e.target);
+	if(targetEl.length > 0) {
+		targetEl[0].insertAdjacentHTML('afterbegin', `<p class="conf-step__seances-movie-title">${film}</p>`);
+	} else {
+		alert('Фильм уже добавлен!');
+	}
+	//window.location.href = '/admin/seance/create';	
 	e.dataTransfer.clearData();
 }));
+
+//const hall = e.target.previousElementSibling.textContent;
+//dataBox['filmName'] = film;
+//dataBox['hallName'] = hall;	
+/*fetch('/api/seances', {
+	method: 'POST',
+	headers: {'Content-Type': 'application/json'},
+	body: JSON.stringify({ data: dataBox })
+	})
+	.then(response => response.json())
+	.then(data => {console.log('Success:', data);
+});	*/
