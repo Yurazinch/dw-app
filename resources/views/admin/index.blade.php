@@ -103,8 +103,7 @@
         </div>
         
         <fieldset class="conf-step__buttons text-center">
-          <button class="conf-step__button conf-step__button-regular">Отмена</button>
-          <input type="submit" value="Сохранить" class="conf-step__button conf-step__button-accent">
+          <livewire:field-set />
         </fieldset>  
       </div>
     </section>

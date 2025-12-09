@@ -133,8 +133,6 @@ Array.from(filmBoxes.children).forEach(filmBox => filmBox.addEventListener('drag
 
 Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('dragover', (e) => e.preventDefault()));
 
-//const dataBox = [];
-
 Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) => {
 	const film = e.dataTransfer.getData('text');
 	const targetEl = Array.from(timeLine.children).filter(el => el === e.target);
@@ -147,7 +145,8 @@ Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) 
 	e.dataTransfer.clearData();
 }));
 
-//const hall = e.target.previousElementSibling.textContent;
+//const dataBox = [];
+//const hall = element.previousElementSibling.textContent;
 //dataBox['filmName'] = film;
 //dataBox['hallName'] = hall;	
 /*fetch('/api/seances', {

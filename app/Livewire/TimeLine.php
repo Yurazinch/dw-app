@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Seance;
+use Livewire\Attributes\On; 
 
 class TimeLine extends Component
 {
@@ -22,8 +23,9 @@ class TimeLine extends Component
         '18:00', 
         '20:00',
         '22:00', 
-    ];
-
+    ];    
+        
+    #[On('reload')]
     public function render()
     {
         return view('livewire.time-line');

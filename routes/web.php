@@ -54,3 +54,5 @@ Route::get('/admin/seance/{seance}', function($seance) {
 })->name('seance.toremove');
 
 Route::get('/admin/seance/remove/{id}', [SeanceController::class, 'destroy'])->name('seance.remove');
+
+Route::get('/films', [GuestController::class], 'addLists')->name('guest.lists');
