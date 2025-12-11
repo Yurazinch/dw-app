@@ -49,10 +49,8 @@ Route::post('/admin/seance/store', [SeanceController::class, 'store'])->name('se
 
 Route::get('/admin/seance/show/{id}', [SeanceController::class, 'show'])->name('seance.show');
 
-Route::get('/admin/seance/{seance}', function($seance) {
+Route::get('/admin/seance/toremove/{id}', function($id) {
     return view('admin/removeseance', ['id' => $id]);
 })->name('seance.toremove');
 
 Route::get('/admin/seance/remove/{id}', [SeanceController::class, 'destroy'])->name('seance.remove');
-
-Route::get('/films', [GuestController::class], 'addLists')->name('guest.lists');

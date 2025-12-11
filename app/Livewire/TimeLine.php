@@ -4,6 +4,7 @@ namespace App\Livewire;
 
 use Livewire\Component;
 use App\Models\Seance;
+use App\Models\Film;
 use Livewire\Attributes\On; 
 
 class TimeLine extends Component
@@ -23,7 +24,19 @@ class TimeLine extends Component
         '18:00', 
         '20:00',
         '22:00', 
-    ];    
+    ];   
+    
+    public bool $addmovie = true;
+
+    public function add() 
+    {
+        //...
+    }
+
+    public function removeform($id)
+    {
+        return redirect()->route('seance.toremove', ['id' => $id]);
+    }
         
     #[On('reload')]
     public function render()

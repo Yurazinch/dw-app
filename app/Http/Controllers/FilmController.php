@@ -25,7 +25,8 @@ class FilmController extends Controller
         $film = new Film;
         $film->name = $request->name;
         $film->description = $request->description;
-        $film->duration = $request->duration;        
+        $film->duration = $request->duration; 
+        $film->country = $request->country;       
         $film->poster = $request->file('poster')->store('images', 'public');
         $film->save();
 

@@ -51,11 +51,9 @@ class SeanceController extends Controller
     /**
      * Удалить указанный ресурс из хранилища.
      */
-    public function destroy(Seance $seance)
+    public function destroy(Seance $seance, $id)
     {
-        if($seance->delete()) {
-            return response(null, 404);
-        }
-        return null;
+        $seance = Seance::where('id', $id)->delete();
+        return redirect()->route('admin.lists');
     }
 }
