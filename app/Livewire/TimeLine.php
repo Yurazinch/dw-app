@@ -26,11 +26,11 @@ class TimeLine extends Component
         '22:00', 
     ];   
     
-    public bool $addmovie = true;
+    public bool $isEmpty = true;
 
-    public function add() 
+    public function addform() 
     {
-        //...
+        return redirect()->route('seance.create', []);
     }
 
     public function removeform($id)

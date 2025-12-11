@@ -43,7 +43,7 @@ Route::get('/admin/film/{name}', function($name) {
 
 Route::get('/admin/film/remove/{name}', [FilmController::class, 'destroy'])->name('film.remove');
 
-Route::get('/admin/seance/create', [SeanceCreateController::class, 'createseance']);
+Route::get('/admin/seance/create', [SeanceCreateController::class, 'createseance'])->name('seance.create');
 
 Route::post('/admin/seance/store', [SeanceController::class, 'store'])->name('seance.store');
 

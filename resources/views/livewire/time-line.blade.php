@@ -7,10 +7,10 @@
                 <h3 class="conf-step__seances-title">{{ $hall->name }}</h3>
                 <div class="conf-step__seances-timeline">
                     @foreach($timeline as $key => $value)                                       
-                        <div wire:key="{{ $key }}" class="conf-step__seances-movie" style="width: 85px; background-color: rgb(133, 255, 137); left: {{ 90*$key }}px;">
+                        <div wire:key="{{ $key }}" class="conf-step__seances-movie" wire:click="addform" style="width: 85px; background-color: rgb(133, 255, 137); left: {{ 90*$key }}px; {{$isEmpty?'cursor: pointer':'wait'}}">
                             @foreach($seances as $seance)
                                 @if($hall->id === $seance->hall_id && $seance->start === $value)  
-                                    <p class="conf-step__seances-movie-title" wire:click="removeform({{ $seance->id }})" style="cursor: pointer">{{ $seance->film->name }}</p>
+                                    <p class="conf-step__seances-movie-title" wire:click="removeform({{ $seance->id }})" style="cursor: pointer">{{ $seance->film->name }}</p>                                                                     
                                 @endif
                             @endforeach
                             <p class="conf-step__seances-movie-start">{{ $value }}</p>

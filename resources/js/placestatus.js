@@ -7,6 +7,7 @@ const planButton = document.querySelector('#chairs-plan');
 const priceButton = document.querySelector('#chairs-price');
 const filmBoxes = document.querySelector('.conf-step__movies');
 const timeLines = document.querySelectorAll('.conf-step__seances-timeline');
+const timeBoxes = document.querySelectorAll('.conf-step__seances-movie');
 let selectorValue = [];
 let chairsPlan = [];
 let priceValue = [];
@@ -145,6 +146,17 @@ Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) 
 	e.dataTransfer.clearData();
 }));
 
+window.addEventListener('load', () => {
+	removeAttrSeance();
+});
+
+function removeAttrSeance() {	
+	Array.from(timeBoxes).forEach(timeBox => {
+		if(timeBox.children.length > 1) {			
+			timeBox.removeAttribute('wire:click');			
+		}
+	});
+}
 //const dataBox = [];
 //const hall = element.previousElementSibling.textContent;
 //dataBox['filmName'] = film;
