@@ -24,7 +24,7 @@
             <a class="popup__dismiss" href="{{ route('admin.lists') }}"><img src="/storage/images/close-admin.png" alt="Закрыть"></a>
           </h2>
         </div>
-        <livewire:seance-remove :$id/>
+        <livewire:seance-remove />
       </div>
     </div>
   </div>

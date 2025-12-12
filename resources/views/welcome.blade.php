@@ -277,3 +277,16 @@
         @endif
     </body>
 </html>
+
+
+<!--<select class="conf-step__input" name="hall" required>
+    @foreach($halls as $hall)
+    <option wire:key="{{ $hall->id }}">{{ $hall->name }}</option>
+    @endforeach
+</select>-->
+
+<!--<select class="conf-step__input" name="start_time" required>
+    @foreach($timeline as $key => $value)
+        <option wire:key="{{ $key }}" type="time" wire:model="seance">{{ $value }}</option>
+    @endforeach
+</select>-->

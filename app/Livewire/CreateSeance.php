@@ -6,22 +6,20 @@ use Livewire\Component;
 use App\Models\Hall;
 use App\Models\Film;
 use App\Models\Seance;
+use Illuminate\Http\Request;
 
 class CreateSeance extends Component
 {
-    public $halls;
     public $films;
-    public $seances;
-    public array $timeline = [ 
-        '08:00', 
-        '10:00', 
-        '12:00', 
-        '14:00', 
-        '16:00', 
-        '18:00', 
-        '20:00',
-        '22:00', 
-    ];
+    public $name;  
+    public $value;
+    
+    public function boot(Request $request)
+    {        
+        $this->name = Hall::findOrFail($request->id)->name;
+        $this->films = Film::get();
+        $this->value = $request->value;
+    }
     
     public function render()
     {

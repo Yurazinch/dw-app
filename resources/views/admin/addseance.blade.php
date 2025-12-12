@@ -23,7 +23,7 @@
           <a class="popup__dismiss" href="{{ route('admin.lists') }}"><img src="/storage/images/close-admin.png" alt="Закрыть"></a>
         </h2>
       </div>
-      <livewire:create-seance :$halls :$films />
+      <livewire:create-seance />
     </div>
   </div>
 </div>

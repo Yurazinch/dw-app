@@ -3,10 +3,7 @@
 namespace App\Livewire;
 
 use Livewire\Component;
-use App\Models\Hall;
-use App\Models\Film;
 use App\Models\Seance;
-use Livewire\Attributes\On;
 use Illuminate\Http\Request;
 
 class SeanceRemove extends Component

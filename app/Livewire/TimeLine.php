@@ -26,11 +26,9 @@ class TimeLine extends Component
         '22:00', 
     ];   
     
-    public bool $isEmpty = true;
-
-    public function addform() 
+    public function addform($id, $value) 
     {
-        return redirect()->route('seance.create', []);
+        return redirect()->route('seance.create', ['id' => $id, 'value' => $value]);
     }
 
     public function removeform($id)

@@ -11,6 +11,7 @@ const timeBoxes = document.querySelectorAll('.conf-step__seances-movie');
 let selectorValue = [];
 let chairsPlan = [];
 let priceValue = [];
+let start = '';
 
 places.addEventListener('click', (e) => {	
 	if(e.target.classList.contains('conf-step__chair_disabled')) {
@@ -157,6 +158,14 @@ function removeAttrSeance() {
 		}
 	});
 }
+
+Array.from(timeBoxes).forEach(timeBox => timeBox.addEventListener('click', (e) => {
+	if(timeBox === e.target) {
+		start = timeBox.firstChild.textContent;
+		console.log(start);
+	}
+}));
+
 //const dataBox = [];
 //const hall = element.previousElementSibling.textContent;
 //dataBox['filmName'] = film;
