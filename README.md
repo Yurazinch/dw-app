@@ -17,11 +17,13 @@ Zend Engine v4.4.10, Copyright (c) Zend Technologies.
 
 2. Установка зависимостей: запустить в терминале проекта команду: composer install --optimize-autoloader
 
-3. Создание .env: Скопируйте .env.example в .env
+3. Создание .env: Скопируйте .env.example в .env (ключ base64:R+YHHST/VPNjaXVeqOp0s5vH44emWdQEXVcTpVx+JZc=)
 
 4. Запустите миграции: php artisan migrate
 
 5. Для запуска проекта на сервере в терминале проекта команда: composer run dev
+
+6. 
 
 Вариант реализации: **Laravel App**.
 
