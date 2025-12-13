@@ -11,7 +11,7 @@ const timeBoxes = document.querySelectorAll('.conf-step__seances-movie');
 let selectorValue = [];
 let chairsPlan = [];
 let priceValue = [];
-let start = '';
+let pushSeances = [];
 
 places.addEventListener('click', (e) => {	
 	if(e.target.classList.contains('conf-step__chair_disabled')) {
@@ -148,23 +148,38 @@ Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) 
 }));
 
 window.addEventListener('load', () => {
-	removeAttrSeance();
-});
-
-function removeAttrSeance() {	
 	Array.from(timeBoxes).forEach(timeBox => {
 		if(timeBox.children.length > 1) {			
 			timeBox.removeAttribute('wire:click');			
 		}
 	});
-}
+	pushSeances = [];
+});
 
-Array.from(timeBoxes).forEach(timeBox => timeBox.addEventListener('click', (e) => {
-	if(timeBox === e.target) {
-		start = timeBox.firstChild.textContent;
-		console.log(start);
+document.getElementById('saveSeances').addEventListener('click', () => {
+	Array.from(timeBoxes).forEach(timeBox => {
+		if(timeBox.children.length === 2 && !timeBox.lastElementChild.hasAttribute('wire:key')) {
+			let hallName = timeBox.closest('.conf-step__seances-hall').firstElementChild.textContent;
+			let filmName = timeBox.firstElementChild.textContent;
+			let start = timeBox.lastElementChild.textContent;
+			pushSeances.push({
+				hall_name: hallName,
+				film_name: filmName,
+				start_time: start
+			});
+		}
+	});
+	if(pushSeances.length === 0) {
+		alert('Нет добавленных новых сеансов!');
 	}
-}));
+	console.log(pushSeances);
+})
+
+document.getElementById('clearSeances').addEventListener('click', () => {
+	pushSeances = [];
+	console.log(pushSeances);
+});
+
 
 //const dataBox = [];
 //const hall = element.previousElementSibling.textContent;

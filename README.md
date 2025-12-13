@@ -1,6 +1,31 @@
 # План к дипломному проекту #
 
+*Среда разработки:*
+
+1. Сервер: Apache/2.4.64 (Win64)
+Apache Lounge VS17 Server built:   Jul  9 2025.
+
+2. PHP 8.4.10 (cli) (built: Jul  2 2025 11:04:43) (ZTS Visual C++ 2022 x64)
+Copyright (c) The PHP Group
+Zend Engine v4.4.10, Copyright (c) Zend Technologies.
+
+3. База данных SQLite.
+
+Развертывание проекта:
+
+1. Клонирование проекта: Перенесите код из Git-репозитория (например, на сервер в .../www/your-project).
+
+2. Установка зависимостей: запустить в терминале проекта команду: composer install --optimize-autoloader
+
+3. Создание .env: Скопируйте .env.example в .env
+
+4. Запустите миграции: php artisan migrate
+
+5. Для запуска проекта на сервере в терминале проекта команда: composer run dev
+
 Вариант реализации: **Laravel App**.
+
+-------------------
 
 *Анализ проекта*
 

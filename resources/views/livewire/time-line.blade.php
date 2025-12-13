@@ -11,7 +11,7 @@
                             <p class="conf-step__seances-movie-start">{{ $value }}</p>
                             @foreach($seances as $seance)
                                 @if($hall->id === $seance->hall_id && $seance->start === $value)  
-                                    <p class="conf-step__seances-movie-title" wire:click="removeform({{ $seance->id }})" style="cursor: pointer">{{ $seance->film->name }}</p>                                                                     
+                                    <p wire:key="{{ $seance->id }}" class="conf-step__seances-movie-title" wire:click="removeform({{ $seance->id }})" style="cursor: pointer">{{ $seance->film->name }}</p>                                                                     
                                 @endif
                             @endforeach                                                     
                         </div>                        
