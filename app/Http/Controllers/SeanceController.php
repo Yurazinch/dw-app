@@ -6,7 +6,8 @@ use App\Models\Seance;
 use App\Models\Hall;
 use App\Models\Film;
 use Illuminate\Http\Request;
-use Illuminate\Validation\Rule;;
+use Illuminate\Validation\Rule;
+use Illuminate\Http\RedirectResponse;
 
 class SeanceController extends Controller
 {
@@ -35,25 +36,31 @@ class SeanceController extends Controller
      */
     public function show($id)
     {
-        return Seance::findOrFail($id);
+        //...
     }
 
 
     /**
      * Обновить указанный ресурс в хранилище.
      */
-    public function update(SeanceRequest $request, Seance $seance)
+    public function update(Request $request): RedirectResponse
     {
-        $seance->fill($request->validate());
-        return $seance->save();
+        /*foreach($request as $el) 
+        {
+            $validated = $el->validate();
+            $seance = new Seance;
+            $seance->hall_id = Hall::where('name', $validated['hall_name'])->value('id');
+            $seance->film_id = Film::where('name', $validated['film_name'])->value('id');
+            $seance->start = $validated['atert_time'];
+            $seance->save();
+        }   
+        
+        return response()->json(['message' => 'Данные успешно получены!', 'received_data' => $data]);*/
     }
-
-    /**
-     * Удалить указанный ресурс из хранилища.
-     */
+    
     public function destroy(Seance $seance, $id)
     {
-        $seance = Seance::where('id', $id)->delete();
-        return redirect()->route('admin.lists');
+        Seance::where('id', $id)->delete();
+        return  redirect()->route('admin.lists');
     }
 }

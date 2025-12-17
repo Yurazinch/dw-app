@@ -21,13 +21,13 @@ Route::post('/admin/auth', [LoginController::class, 'authenticate'])->name('admi
 
 Route::get('/admin/lists', [AdminController::class, 'addlists'])->name('admin.lists');
 
-Route::view('/admin/home', 'admin/index')->name('admin.home');
+Route::view('/home', 'admin/index')->name('admin.home');
 
-Route::get('/admin/hall/create', [HallController::class, 'create'])->name('hall.create');
+Route::get('/hall/create', [HallController::class, 'create'])->name('hall.create');
 
-Route::post('/admin/hall/store', [HallController::class, 'store'])->name('hall.store');
+Route::post('/hall', [HallController::class, 'store'])->name('hall.store');
 
-Route::get('/admin/hall/remove/{name}', [HallController::class, 'destroy'])->name('hall.remove');
+Route::delete('/hall/{name}', [HallController::class, 'destroy'])->name('hall.remove');
 
 Route::get('/admin/hall/{name}', function($name) {
     return view('admin/removehall', ['name' => $name]);
@@ -46,6 +46,8 @@ Route::get('/admin/film/remove/{name}', [FilmController::class, 'destroy'])->nam
 Route::get('/admin/seance/create', [SeanceCreateController::class, 'createseance'])->name('seance.create');
 
 Route::post('/admin/seance/store', [SeanceController::class, 'store'])->name('seance.store');
+
+Route::post('/admin/seance/update', [SeanceController::class, 'update'])->name('seance.update');
 
 Route::get('/admin/seance/show/{id}', [SeanceController::class, 'show'])->name('seance.show');
 

@@ -11,7 +11,7 @@ const timeBoxes = document.querySelectorAll('.conf-step__seances-movie');
 let selectorValue = [];
 let chairsPlan = [];
 let priceValue = [];
-let pushSeances = [];
+let seances = [];
 
 places.addEventListener('click', (e) => {	
 	if(e.target.classList.contains('conf-step__chair_disabled')) {
@@ -153,43 +153,52 @@ window.addEventListener('load', () => {
 			timeBox.removeAttribute('wire:click');			
 		}
 	});
-	pushSeances = [];
+	seances = [];
 });
 
 document.getElementById('saveSeances').addEventListener('click', () => {
-	Array.from(timeBoxes).forEach(timeBox => {
+	const formData = new FormData();
+	Array.from(timeBoxes).forEach((timeBox, index) => {
 		if(timeBox.children.length === 2 && !timeBox.lastElementChild.hasAttribute('wire:key')) {
 			let hallName = timeBox.closest('.conf-step__seances-hall').firstElementChild.textContent;
 			let filmName = timeBox.firstElementChild.textContent;
 			let start = timeBox.lastElementChild.textContent;
-			pushSeances.push({
-				hall_name: hallName,
-				film_name: filmName,
-				start_time: start
+			seances.push({
+				hall: hallName,
+				film: filmName,
+				start: start
 			});
 		}
 	});
-	if(pushSeances.length === 0) {
+		
+	if(seances.length === 0) {
 		alert('Нет добавленных новых сеансов!');
 	}
-	console.log(pushSeances);
-})
 
-document.getElementById('clearSeances').addEventListener('click', () => {
-	pushSeances = [];
-	console.log(pushSeances);
+	sendData(seances);
+	
+	console.log(JSON.stringify(seances));
 });
 
+function sendData(seances) {
+	try {
+		fetch('/api/seances', {
+			method: 'POST',
+			mode: 'cors',
+			body: JSON.stringify({ seances }),
+			headers: {
+			'Content-Type': 'application/json',
+			'X-CSRF-TOKEN': '{{ csrf_token() }}'
+			}
+		})
+		.then((response) => response.json())
+		.then((data) => {console.log(data)});		
+	} catch (error) {
+		console.error("Ошибка:", error);
+	}
+}
 
-//const dataBox = [];
-//const hall = element.previousElementSibling.textContent;
-//dataBox['filmName'] = film;
-//dataBox['hallName'] = hall;	
-/*fetch('/api/seances', {
-	method: 'POST',
-	headers: {'Content-Type': 'application/json'},
-	body: JSON.stringify({ data: dataBox })
-	})
-	.then(response => response.json())
-	.then(data => {console.log('Success:', data);
-});	*/
+document.getElementById('clearSeances').addEventListener('click', () => {
+	seances = [];
+	console.log(seances);
+});

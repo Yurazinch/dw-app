@@ -21,9 +21,11 @@ Zend Engine v4.4.10, Copyright (c) Zend Technologies.
 
 4. Запустите миграции: php artisan migrate
 
-5. Для запуска проекта на сервере в терминале проекта команда: composer run dev
+5. Для запуска проекта на сервере в терминале проекта команда: 
 
-6. 
+    npm install && npm run build (это при установке laravel выполняется, не уверен что при разворачивании проекта нужно)
+
+    composer run dev
 
 Вариант реализации: **Laravel App**.
 
