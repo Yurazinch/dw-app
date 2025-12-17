@@ -18,16 +18,14 @@ class ApiSeanseController extends Controller
     
     public function store(StoreSeanceRequest $request)
     {
-        $seances = $request->all();
-        $data = [];
-        $i = 0;
+        $seances = $request->seances;
+        $data = [];        
         foreach($seances as $seance) {            
             $data[] = [
-            'hall_id' => Hall::where('name', $seance[$i]['hall'])->value('id'),
-            'film_id' => Film::where('name', $seance[$i]['film'])->value('id'),
-            'start' => $seance[$i]['start'],
+            'hall_id' => Hall::where('name', $seance['hall'])->value('id'),
+            'film_id' => Film::where('name', $seance['film'])->value('id'),
+            'start' => $seance['start'],
             ];
-            $i++;
         }
         return Seance::insert($data);
     }
