@@ -5,14 +5,13 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Seance;
 use App\Models\Film;
+use App\Models\Hall;
 use Livewire\Attributes\On; 
 
 class TimeLine extends Component
 {
     public $halls;
-
-    public $films;
-   
+    public $films;   
     public $seances;
 
     public array $timeline = [ 
@@ -25,6 +24,14 @@ class TimeLine extends Component
         '20:00',
         '22:00', 
     ];   
+
+    #[On('reload')]
+    public function boot()
+    {
+        $this->seances = Seance::get();
+        $this->films = Film::get();
+        $this->halls = Hall::get();
+    }
     
     public function addform($id, $value) 
     {
@@ -36,7 +43,6 @@ class TimeLine extends Component
         return redirect()->route('seance.toremove', ['id' => $id]);
     }
         
-    #[On('reload')]
     public function render()
     {
         return view('livewire.time-line');

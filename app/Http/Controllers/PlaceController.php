@@ -35,7 +35,7 @@ class PlaceController extends Controller
         $place->status = $validated->status;
         $place->price = $validated->price;
         $place->save();
-        return redirect()->route('admin.lists');
+        return redirect()->route('admin.home');
     }
 
     /**

@@ -6,7 +6,7 @@
              фильм <span>"{{ $seance->film->name }}"</span> ?</p>
         <div class="conf-step__buttons text-center">
             <input type="submit" value="Удалить" class="conf-step__button conf-step__button-accent">
-            <a href="{{ route('admin.lists') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>
+            <a href="{{ route('admin.home') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>
         </div>
     </form>
 </div>

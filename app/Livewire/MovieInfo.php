@@ -13,7 +13,7 @@ class MovieInfo extends Component
 
     public function boot()
     {
-        $this->films = Film::get();
+        $this->films = Film::orderBy('start', 'desc')->get();
         $this->halls = Hall::get();
     }
 

@@ -30,9 +30,9 @@ class HallController extends Controller
         ]);
         
         $hall = new Hall;
-        $hall->name = $validated->name;     
+        $hall->name = $validated['name'];     
         $hall->save();
-        return redirect()->route('admin.lists');
+        return redirect()->route('admin.home');
     }
 
     /**
@@ -65,6 +65,6 @@ class HallController extends Controller
     public function destroy(Hall $hall, $name)
     {
         $hall = Hall::where('name', $name)->delete();
-        return redirect()->route('admin.lists');
+        return redirect()->route('admin.home');
     }
 }

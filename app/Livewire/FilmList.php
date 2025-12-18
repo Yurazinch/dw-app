@@ -8,6 +8,11 @@ use App\Models\Film;
 class FilmList extends Component
 {
     public $films;
+
+    public function boot()
+    {
+        $this->films = Film::get();
+    }
     
     public function render()
     {

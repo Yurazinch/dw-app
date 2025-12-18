@@ -28,7 +28,7 @@
       
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Доступные залы:</p>
-        <livewire:hall-list :halls="$halls" />
+        <livewire:hall-list />
         <a href="{{ route('hall.create') }}"><button class="conf-step__button conf-step__button-accent">Создать зал</button></a>        
       </div>
     </section>
@@ -39,7 +39,7 @@
       </header>
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Выберите зал для конфигурации:</p>
-        <livewire:hall-button :halls="$halls" />
+        <livewire:hall-button />
         <p class="conf-step__paragraph">Укажите количество рядов и максимальное количество кресел в ряду:</p>
         <div class="conf-step__legend">
           <label class="conf-step__label">Рядов, шт<input type="text" name="rows" class="conf-step__input conf-step__input-size" placeholder="10" ></label>
@@ -71,7 +71,7 @@
       </header>
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">Выберите зал для конфигурации:</p>
-        <livewire:hall-button :halls="$halls" />          
+        <livewire:hall-button />          
         <p class="conf-step__paragraph">Установите цены для типов кресел:</p>
           <div class="conf-step__legend">
             <label class="conf-step__label">Цена, рублей<input type="text" name="standart" class="conf-step__input conf-step__input-price" placeholder="0" ></label>
@@ -97,9 +97,9 @@
         <p class="conf-step__paragraph">
           <a href="{{ route('film.create') }}"><button class="conf-step__button conf-step__button-accent">Добавить фильм</button></a>
         </p>
-        <livewire:film-list :films="$films" />        
+        <livewire:film-list />        
         <div class="conf-step__seances">
-          <livewire:time-line :$halls :$seances/>
+          <livewire:time-line />
         </div>
         
         <fieldset class="conf-step__buttons text-center">

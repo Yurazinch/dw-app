@@ -21,7 +21,7 @@
       <div class="popup__header">
         <h2 class="popup__title">
           Удаление фильма
-          <a class="popup__dismiss" href="{{ route('admin.lists') }}"><img src="/storage/images/close-admin.png" alt="Закрыть"></a>
+          <a class="popup__dismiss" href="{{ route('admin.home') }}"><img src="/storage/images/close-admin.png" alt="Закрыть"></a>
         </h2>
       </div>
       <div class="popup__wrapper">
@@ -29,7 +29,7 @@
           <p class="conf-step__paragraph">Вы действительно хотите удалить фильм <span>"{{ $name }}"</span>?</p>
           <div class="conf-step__buttons text-center">
             <input type="submit" value="Удалить" class="conf-step__button conf-step__button-accent">
-            <a href="{{ route('admin.lists') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>
+            <a href="{{ route('admin.home') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>
           </div>
         </form>
       </div>

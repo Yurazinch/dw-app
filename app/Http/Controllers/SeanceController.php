@@ -28,7 +28,7 @@ class SeanceController extends Controller
         $seance->start = $validated['start_time'];
         $seance->save();
         
-        return redirect()->route('admin.lists');
+        return redirect()->route('admin.home');
     }
 
     /**
@@ -61,6 +61,6 @@ class SeanceController extends Controller
     public function destroy(Seance $seance, $id)
     {
         Seance::where('id', $id)->delete();
-        return  redirect()->route('admin.lists');
+        return  redirect()->route('admin.home');
     }
 }

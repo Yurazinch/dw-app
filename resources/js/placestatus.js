@@ -3,13 +3,11 @@ const selectorsBox = document.querySelectorAll('.conf-step__radio');
 const hallSizeInputs = document.querySelectorAll('.conf-step__input-size');
 const hallPriceInputs = document.querySelectorAll('.conf-step__input-price');
 const hallReset = document.querySelector('.conf-step__button-regular');
-const planButton = document.querySelector('#chairs-plan');
-const priceButton = document.querySelector('#chairs-price');
 const filmBoxes = document.querySelector('.conf-step__movies');
 const timeLines = document.querySelectorAll('.conf-step__seances-timeline');
 const timeBoxes = document.querySelectorAll('.conf-step__seances-movie');
 let selectorValue = [];
-let chairsPlan = [];
+let chairs = [];
 let priceValue = [];
 let seances = [];
 
@@ -45,7 +43,7 @@ hallSizeInputs.forEach(item => {
 	});	
 });
 
-priceButton.addEventListener('click', () => {
+document.querySelector('#chairs-price').addEventListener('click', () => {
 	let index = Array.from(selectorsBox).findIndex(box => box.classList.contains('checked'));
 	if((index ^ 0) === index) {
 		chairsPlan.push({
@@ -75,7 +73,7 @@ hallReset.addEventListener('click', () => {
 	});
 });
 
-planButton.addEventListener('click', () => {
+document.querySelector('#chairs-plan').addEventListener('click', () => {
 	let index = Array.from(selectorsBox).findIndex(box => box.classList.contains('checked'));
 	if((index ^ 0) === index) {
 		chairsPlan.push({
@@ -119,14 +117,16 @@ function hallPlan() {
 			} else if (chair.classList.contains('conf-step__chair_vip')) {
 				chs = 'vip';
 			}
-			chairsPlan.push({
-				ряд: rn,
-				место: chn,
-				тип: chs,
-				цена: 0
+			chairs.push({
+				row: rn,
+				place: chn,
+				status: chs,
+				price: 0
 			})						
 		});
 	});
+
+	sendData(chairs, '/api/places');
 }
 
 Array.from(filmBoxes.children).forEach(filmBox => filmBox.addEventListener('dragstart', (e) => {
@@ -143,7 +143,6 @@ Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) 
 	} else {
 		alert('Фильм уже добавлен!');
 	}
-	//window.location.href = '/admin/seance/create';	
 	e.dataTransfer.clearData();
 }));
 
@@ -174,10 +173,10 @@ document.getElementById('saveSeances').addEventListener('click', () => {
 	if(seances.length === 0) {
 		alert('Нет добавленных новых сеансов!');
 	}
+	
+	let url = '/api/seances';
 
 	sendData(seances);
-	
-	console.log(JSON.stringify(seances));
 });
 
 function sendData(seances) {
@@ -200,5 +199,4 @@ function sendData(seances) {
 
 document.getElementById('clearSeances').addEventListener('click', () => {
 	seances = [];
-	console.log(seances);
 });

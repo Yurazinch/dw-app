@@ -20,11 +20,11 @@
       <div class="popup__header">
         <h2 class="popup__title">
           Добавление зала
-          <a class="popup__dismiss" href="{{ route('admin.lists') }}"><img src="/storage/images/close-admin.png" alt="Закрыть"></a>
+          <a class="popup__dismiss" href="{{ route('admin.home') }}"><img src="/storage/images/close-admin.png" alt="Закрыть"></a>
         </h2>
       </div>
       <div class="popup__wrapper">
-        <form action="/admin/hall/store" method="post" accept-charset="utf-8">
+        <form action="{{ route('hall.store') }}" method="post" accept-charset="utf-8">
           @csrf
           <label class="conf-step__label conf-step__label-fullsize" for="add-hall">
             Название зала
@@ -32,7 +32,7 @@
           </label>
           <div class="conf-step__buttons text-center">
             <input type="submit" value="Добавить зал" class="conf-step__button conf-step__button-accent" data-event="hall_add">
-            <a href="{{ route('admin.lists') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>
+            <a href="{{ route('admin.home') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>
           </div>
         </form>
       </div>

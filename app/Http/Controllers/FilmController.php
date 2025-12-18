@@ -30,7 +30,7 @@ class FilmController extends Controller
         $film->poster = $request->file('poster')->store('images', 'public');
         $film->save();
 
-        return redirect()->route('admin.lists');
+        return redirect()->route('admin.home');
         
     }
 
@@ -66,6 +66,6 @@ class FilmController extends Controller
         $poster = Film::where('name', $name)->pluck('poster');
         Storage::delete('$poster');
         $film = Film::where('name', $name)->delete();
-        return redirect()->route('admin.lists');
+        return redirect()->route('admin.home');
     }
 }

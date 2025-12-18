@@ -1,5 +1,5 @@
 <div class="popup__wrapper">
-    <form action="/admin/seance/store" method="post" accept-charset="utf-8">
+    <form action="{{ route('seance.store') }}" method="post" accept-charset="utf-8">
         @csrf
         <label class="conf-step__label conf-step__label-fullsize">
         Выбранный зал
@@ -21,7 +21,7 @@
 
         <div class="conf-step__buttons text-center">
         <input type="submit" value="Добавить" class="conf-step__button conf-step__button-accent" data-event="seance_add">
-        <a href="{{ route('admin.lists') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>
+        <a href="{{ route('admin.home') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>
         </div>        
     </form>
 </div>
