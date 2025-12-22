@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Hall;
+use App\Models\Place;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\RedirectResponse;
@@ -65,6 +66,16 @@ class HallController extends Controller
     public function destroy(Hall $hall, $name)
     {
         $hall = Hall::where('name', $name)->delete();
+        return redirect()->route('admin.home');
+    }
+
+    public function plandestroy($id)
+    {
+        $places = Hall::find($id)->places;
+        foreach($places as $place) 
+        {
+            $place->delete();
+        }
         return redirect()->route('admin.home');
     }
 }

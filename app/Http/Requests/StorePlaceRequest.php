@@ -3,9 +3,8 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Rule;
 
-class StoreSeanceRequest extends FormRequest
+class StorePlaceRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,10 +22,12 @@ class StoreSeanceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'seances' => 'array',
-            'seances.*.hall' => 'required|string',
-            'seances.*.film' => 'required|string',
-            'seances.*.start' => ['required', Rule::date()->format("H:i")],
+            'chairs' => 'array',
+            'chairs.*.hall' => 'required|string',
+            'chairs.*.row' => 'required|integer',
+            'chairs.*.place' => 'required|integer',
+            'chairs.*.type' => 'required|string',
+            'chairs.*.price' => 'required|decimal:0,2',
         ];
     }
 }

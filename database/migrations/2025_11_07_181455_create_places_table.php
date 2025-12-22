@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('hall_id'); //foreign key
             $table->integer('row'); //номер ряда
             $table->integer('place'); //номер места в ряду
-            $table->string('status')->default('disabled');
+            $table->string('type')->default('disabled');
             $table->decimal('price')->default(0); //цена места
             $table->timestamps();
         });

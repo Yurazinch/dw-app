@@ -290,3 +290,52 @@
         <option wire:key="{{ $key }}" type="time" wire:model="seance">{{ $value }}</option>
     @endforeach
 </select>-->
+
+<!--<p class="conf-step__paragraph">Укажите количество рядов и максимальное количество кресел в ряду:</p>
+        <div class="conf-step__legend">
+          <label class="conf-step__label">Рядов, шт<input type="text" name="rows" class="conf-step__input conf-step__input-size" placeholder="10" ></label>
+          <span class="multiplier">x</span>
+          <label class="conf-step__label">Мест, шт<input type="text" name="chairs" class="conf-step__input conf-step__input-size" placeholder="8" ></label>
+        </div>
+        <p class="conf-step__paragraph">Теперь вы можете указать типы кресел на схеме зала:</p>
+        <div class="conf-step__legend">
+          <span class="conf-step__chair conf-step__chair_standart"></span> — обычные кресла
+          <span class="conf-step__chair conf-step__chair_vip"></span> — VIP кресла
+          <span class="conf-step__chair conf-step__chair_disabled"></span> — заблокированные (нет кресла)
+          <p class="conf-step__hint">Чтобы изменить вид кресла, нажмите по нему левой кнопкой мыши</p>
+        </div>  
+        
+        <div class="conf-step__hall">
+          <div class="conf-step__hall-wrapper">
+            
+          </div>  
+        </div>
+        
+        <fieldset class="conf-step__buttons text-center">
+          <button class="conf-step__button conf-step__button-regular">Отмена</button>
+          <input type="submit" id="chairs-plan" value="Сохранить" class="conf-step__button conf-step__button-accent">
+        </fieldset>--> 
+
+        <!--<ul class="conf-step__selectors-box">
+      @if(count($halls) === 0)
+          <p class="conf-step__paragraph">Залы не добавлены!</p>
+      @else
+          @foreach($halls as $hall)
+              <li wire:key="{{ $hall->id }}">
+                  <input wire:click="hallselected({{ $hall }})" type="radio" class="conf-step__radio" name="chairs-hall" value="{{ $hall->name }}">
+            <span class="conf-step__selector">{{ $hall->name }}</span></li>
+        @endforeach
+    @endif
+  </ul>-->
+
+  <!--<ul class="conf-step__selectors-box">
+      @if(count($halls) === 0)
+          <p class="conf-step__paragraph">Залы не добавлены!</p>
+      @else
+          @foreach($halls as $hall)
+              <li wire:key="{{ $hall->id }}">
+                  <input wire:click="hallselected({{ $hall }})" type="radio" class="conf-step__radio" name="chairs-hall" value="{{ $hall->name }}">
+            <span class="conf-step__selector">{{ $hall->name }}</span></li>
+        @endforeach
+    @endif
+  </ul>-->

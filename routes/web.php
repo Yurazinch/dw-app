@@ -31,6 +31,8 @@ Route::get('/removehall/{name}', function($name) {
     return view('admin/removehall', ['name' => $name]);
 })->name('hall.toremove');
 
+Route::get('/removeplan/{id}', [HallController::class, 'plandestroy'])->name('plan.remove');
+
 Route::get('/film/create', [FilmController::class, 'create'])->name('film.create');
 
 Route::post('/film', [FilmController::class, 'store'])->name('film.store');

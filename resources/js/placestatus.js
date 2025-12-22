@@ -21,16 +21,16 @@ places.addEventListener('click', (e) => {
 	}
 });
 
-selectorsBox.forEach(box => {
-	box.addEventListener('click', () => {
+// Перевел в бэк
+/*selectorsBox.forEach(box => {
+	box.addEventListener('click', (e) => {
 		let index = Array.from(selectorsBox).findIndex(box => box.classList.contains('checked'));
-		console.log(index);
-		if(index !== -1) {
+		/*if(index >= 0) {
 			selectorsBox[index].classList.remove('checked');
 		}
-		box.classList.add('checked');
+		e.target.classList.add('checked');
 	});
-});
+});*/
 
 hallSizeInputs.forEach(item => {
 	item.addEventListener('change', () => {
@@ -45,14 +45,14 @@ hallSizeInputs.forEach(item => {
 
 document.querySelector('#chairs-price').addEventListener('click', () => {
 	let index = Array.from(selectorsBox).findIndex(box => box.classList.contains('checked'));
-	if((index ^ 0) === index) {
+	if((index > -1) === index) {
 		chairsPlan.push({
 			зал: selectorsBox[index].value
 		});
 	} else {
 		alert('Нужно выбрать зал!');
 	}
-	priceValue['зал'] = selectorsBox[index].value;
+	priceValue['hall'] = selectorsBox[index].value;
 	hallPriceInputs.forEach(item => {
 		let name = item.name;
 		let value = item.value;
@@ -74,15 +74,12 @@ hallReset.addEventListener('click', () => {
 });
 
 document.querySelector('#chairs-plan').addEventListener('click', () => {
-	let index = Array.from(selectorsBox).findIndex(box => box.classList.contains('checked'));
-	if((index ^ 0) === index) {
-		chairsPlan.push({
-			зал: selectorsBox[index].value
-		});
-	} else {
-		alert('Нужно выбрать зал!');
-	}
-	hallPlan();
+	let selectedBox = Array.from(selectorsBox).filter(box => box.classList.contains('checked'));
+		console.log(selectedBox);
+		if(selectedBox.length === 0) {
+		alert('Нужно выбрать зал!');		
+	}	
+	hallPlan(selectedBox);
 });
 
 function hallRender() {
@@ -104,7 +101,11 @@ function hallRender() {
 	}
 }
 
-function hallPlan() {	
+function hallPlan(selectedBox) {		
+	if(places.children.length === 0) {
+		alert('Нужно выбрать конфигурацию зала!');
+	}	
+	let hn = selectedBox[0].value;
 	Array.from(places.children).forEach(row => {
 		let rn = row.getAttribute('number');			
 		Array.from(row.children).forEach(chair => {
@@ -118,15 +119,34 @@ function hallPlan() {
 				chs = 'vip';
 			}
 			chairs.push({
+				hall: hn,
 				row: rn,
 				place: chn,
-				status: chs,
+				type: chs,
 				price: 0
 			})						
 		});
 	});
 
-	sendData(chairs, '/api/places');
+	sendChairs(chairs);
+}
+
+function sendChairs(chairs) {
+	try {
+		fetch('/api/chairs', {
+			method: 'POST',
+			mode: 'cors',
+			body: JSON.stringify({ chairs }),
+			headers: {
+			'Content-Type': 'application/json',
+			'X-CSRF-TOKEN': '{{ csrf_token() }}'
+			}
+		})
+		.then((response) => response.json())
+		.then((data) => {console.log(data)});		
+	} catch (error) {
+		console.error("Ошибка:", error);
+	}
 }
 
 Array.from(filmBoxes.children).forEach(filmBox => filmBox.addEventListener('dragstart', (e) => {
@@ -172,10 +192,7 @@ document.getElementById('saveSeances').addEventListener('click', () => {
 		
 	if(seances.length === 0) {
 		alert('Нет добавленных новых сеансов!');
-	}
-	
-	let url = '/api/seances';
-
+	}	
 	sendData(seances);
 });
 

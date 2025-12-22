@@ -15,7 +15,7 @@ class Place extends Model
         'hall_Id',
         'place',
         'row',
-        'status',
+        'type',
         'price',
     ];
 

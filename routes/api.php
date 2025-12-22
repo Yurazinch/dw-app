@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ApiSeanseController;
+use App\Http\Controllers\ApiPlaceController;
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -10,4 +11,4 @@ Route::get('/user', function (Request $request) {
 
 Route::apiResource('seances', ApiSeanseController::class);
 
-Route::apiResource('places', ApiSeanseController::class);
+Route::apiResource('chairs', ApiPlaceController::class);
