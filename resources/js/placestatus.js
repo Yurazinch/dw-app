@@ -8,7 +8,7 @@ const timeLines = document.querySelectorAll('.conf-step__seances-timeline');
 const timeBoxes = document.querySelectorAll('.conf-step__seances-movie');
 let selectorValue = [];
 let chairs = [];
-let priceValue = [];
+let prices = [];
 let seances = [];
 
 places.addEventListener('click', (e) => {	
@@ -21,7 +21,7 @@ places.addEventListener('click', (e) => {
 	}
 });
 
-// Перевел в бэк
+// Реализовал в комплоненте livewire
 /*selectorsBox.forEach(box => {
 	box.addEventListener('click', (e) => {
 		let index = Array.from(selectorsBox).findIndex(box => box.classList.contains('checked'));
@@ -44,25 +44,59 @@ hallSizeInputs.forEach(item => {
 });
 
 document.querySelector('#chairs-price').addEventListener('click', () => {
-	let index = Array.from(selectorsBox).findIndex(box => box.classList.contains('checked'));
-	if((index > -1) === index) {
-		chairsPlan.push({
-			зал: selectorsBox[index].value
-		});
-	} else {
-		alert('Нужно выбрать зал!');
+	let selectedBox = Array.from(selectorsBox).filter(box => box.classList.contains('checked'));
+	if(selectedBox.length === 0) {
+		alert('Нужно выбрать зал!');		
 	}
-	priceValue['hall'] = selectorsBox[index].value;
+
+	let hall = selectedBox[0].value;
 	hallPriceInputs.forEach(item => {
 		let name = item.name;
 		let value = item.value;
 		if(item.value > 0) {
-			priceValue[name] = value;		
+			prices.push({
+				type: name,
+				price: value
+			});		
 		} else {
 			alert('Не указана цена!');
 		}
 	});
+	console.log(hall, prices);
+	try {
+		fetch(`/api/chairs/${hall}`, {
+			method: 'PUT',
+			mode: 'cors',
+			body: JSON.stringify({ prices }),
+			headers: {
+			'Content-Type': 'application/json',
+			'X-CSRF-TOKEN': '{{ csrf_token() }}'
+			}
+		})
+		.then((response) => response.json())
+		.then((data) => {console.log(data)});		
+	} catch (error) {
+		console.error("Ошибка:", error);
+	}
 });
+
+function sendPrices(prices) {
+	try {
+		fetch('/api/chairs/', {
+			method: 'PUT',
+			mode: 'cors',
+			body: JSON.stringify({ prices }),
+			headers: {
+			'Content-Type': 'application/json',
+			'X-CSRF-TOKEN': '{{ csrf_token() }}'
+			}
+		})
+		.then((response) => response.json())
+		.then((data) => {console.log(data)});		
+	} catch (error) {
+		console.error("Ошибка:", error);
+	}
+}
 
 hallReset.addEventListener('click', () => {
 	selectorValue = [];
@@ -75,8 +109,7 @@ hallReset.addEventListener('click', () => {
 
 document.querySelector('#chairs-plan').addEventListener('click', () => {
 	let selectedBox = Array.from(selectorsBox).filter(box => box.classList.contains('checked'));
-		console.log(selectedBox);
-		if(selectedBox.length === 0) {
+	if(selectedBox.length === 0) {
 		alert('Нужно выбрать зал!');		
 	}	
 	hallPlan(selectedBox);

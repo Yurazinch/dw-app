@@ -23,11 +23,8 @@ class UpdatePlaceRequest extends FormRequest
     {
         return [
             'chairs' => 'array',
-            'chairs.*.hall' => 'required|string',
-            'chairs.*.row' => 'required|integer',
-            'chairs.*.place' => 'required|integer',
             'chairs.*.type' => 'required|string',
-            'chairs.*.price' => 'required|decimal:0,2',
+            'chairs.*.price' => 'required|string',
         ];
     }
 }
