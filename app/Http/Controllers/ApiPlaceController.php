@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePlaceRequest;
 use App\Http\Requests\UpdatePlaceRequest;
-use Illuminate\Database\Eloquent\Builder;
 use App\Models\Place;
 use App\Models\Hall;
 
