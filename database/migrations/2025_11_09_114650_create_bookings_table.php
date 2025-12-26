@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('place_id');
             $table->integer('seance_id');
+            $table->date('date');
             $table->timestamps();
         });
     }

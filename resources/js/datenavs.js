@@ -23,13 +23,22 @@ const numbers = Array.from(document.querySelectorAll('.page-nav__day-number'));
 const navdays = Array.from(document.querySelectorAll('.page-nav__day'));
 
 navs.forEach((nav, i) => {
-  nav.textContent = dayMenu[i].dayname;
+  nav.textContent = dayMenu[i].dayname;  
 });
-numbers.forEach((nav, i) => {
-  nav.textContent = dayMenu[i].date;
+
+numbers.forEach((number, i) => {
+  number.textContent = dayMenu[i].date;
 });
-navdays.forEach((navday, i) => {
-  if(dayMenu[i].dayname === 'сб' || dayMenu[i].dayname === 'вс') {
-    navday.classList.add('page-nav__day_weekend');
+
+navs.forEach((nav, i) => {
+  if(nav.textContent === 'сб' || nav.textContent === 'вс') {
+    navdays[i].classList.add('page-nav__day_weekend');
   }  
+});
+
+numbers.forEach((number, i) => {  
+  if(number.textContent === new Date(today.getTime()).toLocaleDateString('ru-RU', {day: 'numeric'})) {
+    console.log(number.textContent, new Date(today.getTime()).toLocaleDateString('ru-RU', {day: 'numeric'}));
+    navdays[i].classList.add('page-nav__day_today');
+  }   
 });
