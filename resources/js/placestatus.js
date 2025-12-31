@@ -124,7 +124,7 @@ function hallRender() {
 		for(let j = 0; j < selectorValue['chairs']; j++) {
 			let chair = document.createElement('span');
 			chair.classList.add('conf-step__chair');
-			chair.classList.add('conf-step__chair_disabled');
+			chair.classList.add('conf-step__chair_standart');
 			chair.setAttribute('number', j+1);
 			row.insertAdjacentElement('beforeend', chair);
 		}

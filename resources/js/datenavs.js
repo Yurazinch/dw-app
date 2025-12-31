@@ -38,7 +38,6 @@ navs.forEach((nav, i) => {
 
 numbers.forEach((number, i) => {  
   if(number.textContent === new Date(today.getTime()).toLocaleDateString('ru-RU', {day: 'numeric'})) {
-    console.log(number.textContent, new Date(today.getTime()).toLocaleDateString('ru-RU', {day: 'numeric'}));
     navdays[i].classList.add('page-nav__day_today');
   }   
 });

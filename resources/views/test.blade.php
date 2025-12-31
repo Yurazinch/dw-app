@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="ru">
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World!</title>
+  </head>
+  <body></body>
+</html>

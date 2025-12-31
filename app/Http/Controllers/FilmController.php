@@ -63,7 +63,8 @@ class FilmController extends Controller
      */
     public function destroy(Film $film, $name)
     {
-        $poster = Film::where('name', $name)->pluck('poster');
+        $poster = Film::where('name', $name)->value('poster');
+        dd($poster);
         Storage::delete('$poster');
         $film = Film::where('name', $name)->delete();
         return redirect()->route('admin.home');

@@ -6,9 +6,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Авторизация | ИдёмВКино</title>  
-  @vite(['resources/css/styles-admin.css',
-   'resources/css/normalize-admin.css',
-   'resources/css/styles-admin.scss'
+  @vite([    
+    'resources/css/normalize-admin.css',
+    'resources/css/styles-admin.css',
+    'resources/css/styles-admin.scss'
   ]);
   <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900&amp;subset=cyrillic,cyrillic-ext,latin-ext" rel="stylesheet">
 </head>

@@ -38,14 +38,28 @@ class HallPlan extends Component
     {
         return redirect()->route('plan.remove', [$this->hall_id]);
     }
-
-    public function boot()
+    
+    public function mount()
     {
         $this->halls = Hall::get();
         $this->places = [];
         $this->rows = [];
         $this->empty = 'block';
         $this->plan = 'none';        
+    }
+
+    public function save($place)
+    {
+        if($place['type'] === 'disabled') {
+            $this->type = 'standart';
+        } elseif ($place['type'] === 'standart') {
+            $this->type = 'vip';
+        } elseif ($place['type'] === 'vip') {
+            $this->type = 'disabled';
+        }
+        Place::where('id', $place['id'])->update(['type' => $this->type]);
+        $hall = Hall::find($place['hall_id']);
+        $this->dispatch('hall-selected', $hall);
     }
 
     public function render()
