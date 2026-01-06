@@ -5,8 +5,9 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Illuminate\Support\Facades\Cache;
 
-class FilmListOpen
+class SalesIsActive
 {
     /**
      * Handle an incoming request.
@@ -15,8 +16,9 @@ class FilmListOpen
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if($request) {
-            return route('film.index');
+        $sales = Cache::get('sales', false);
+        if ($sales !== true) {
+            return redirect('/close');
         }
         return $next($request);
     }

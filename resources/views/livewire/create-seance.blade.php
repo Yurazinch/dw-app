@@ -7,7 +7,7 @@
         </label>
         <label class="conf-step__label conf-step__label-fullsize">
         Выбрать фильм
-            <select class="conf-step__input" name="film" required>
+            <select class="conf-step__input" name="film" placeholder="Список фильмов здесь" required>
                 <option>Список фильмов здесь</option>
                 @foreach($films as $film)
                     <option wire:key="{{ $film->id }}">{{ $film->name }}</option>

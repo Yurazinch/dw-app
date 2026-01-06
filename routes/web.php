@@ -8,12 +8,14 @@ use App\Http\Controllers\HallController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\SeanceCreateController;
 use App\Http\Controllers\SeanceController;
+use App\Http\Middleware\SalesIsActive;
 
-Route::get('/welcome', function() {
-    return view('/welcome');
-});
 
-Route::view('/', 'index');
+Route::view('/', 'index')->middleware(SalesIsActive::class)->name('index');
+
+Route::view('/close', 'welcome');
+
+//Route::get('/', [InController::class, 'in']);
 
 Route::view('/admin', 'admin/login');
 

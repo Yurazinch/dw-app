@@ -15,7 +15,7 @@ class SeanceController extends Controller
      * Сохранить вновь созданный ресурс в хранилище.
      */
     public function store(Request $request)
-    {
+    {        
         $validated = $request->validate([
             'hall' => 'required|string|min:3|max:225',
             'film' => 'required|string|min:3|max:225',
@@ -24,7 +24,8 @@ class SeanceController extends Controller
 
         $seance = new Seance;
         $seance->hall_id = Hall::where('name', $validated['hall'])->value('id');
-        $seance->film_id = Film::where('name', $validated['film'])->value('id');
+        $film = Film::where('name', $validated['film'])->firstOrFail();
+        $seance->film_id = $film->id;
         $seance->start = $validated['start_time'];
         $seance->save();
         

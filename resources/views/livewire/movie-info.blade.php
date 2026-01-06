@@ -1,4 +1,4 @@
-<div>
+<div style="display: {{ $info }};">
     @if(count($films) === 0)
         <p class="conf-step__paragraph">Нет фильмов для просмотра!</p>
     @else
@@ -26,7 +26,11 @@
                             <h3 class="movie-seances__hall-title">{{ $hall->name }}</h3>
                             <ul class="movie-seances__list">
                                 @foreach($film->seances->where('hall_id', $hall->id) as $seance)
-                                    <li class="movie-seances__time-block"><a class="movie-seances__time" href="#">{{ $seance->start }}</a></li>
+                                    <li class="movie-seances__time-block">
+                                        <span wire:click="toBuying({{ $seance }})" class="movie-seances__time" style="cursor: pointer;">
+                                            {{ $seance->start }}
+                                        </span>
+                                    </li>
                                 @endforeach
                             </ul>
                         </div>                

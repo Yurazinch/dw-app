@@ -1,4 +1,4 @@
-<div>
+<div style="display: block;">
     <nav wire:ignore class="page-nav">
         <!--<a class="page-nav__day page-nav__day_prev" href="#"></a>-->
         @for($i = 0; $i < 7; $i++)
