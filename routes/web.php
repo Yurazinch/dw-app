@@ -11,7 +11,7 @@ use App\Http\Controllers\SeanceController;
 use App\Http\Middleware\SalesIsActive;
 
 
-Route::view('/', 'index')->middleware(SalesIsActive::class)->name('index');
+Route::view('/', 'index')->name('index');
 
 Route::view('/close', 'welcome');
 

@@ -5,7 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Film;
 use App\Models\Hall;
-use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Cache;
 
 class MovieInfo extends Component
 {
@@ -16,6 +16,16 @@ class MovieInfo extends Component
 
     public function boot()
     {
+        if(Cache::has('sales')) {
+            $this->sales = Cache::get('sales'); 
+            if ($this->sales === false) {
+                $this->info = 'none';
+            } elseif ($this->sales === true) {
+                $this->info = 'block';
+            }
+        } else {
+            $this->info = 'none';
+        }
         $this->films = Film::orderBy('start', 'desc')->get();
         $this->halls = Hall::get();
     }    

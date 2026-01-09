@@ -22,12 +22,19 @@ class FilmController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        $validated = $request->validate([
+            'name' => ['required', 'string'],
+            'description' => ['required', 'string'],
+            'duration' => ['required', 'string'],
+            'country' => ['required', 'string'],
+            'poster' => ['required', 'image'],
+        ]);
         $film = new Film;
-        $film->name = $request->name;
-        $film->description = $request->description;
-        $film->duration = $request->duration; 
-        $film->country = $request->country;       
-        $film->poster = $request->file('poster')->store('images', 'public');
+        $film->name = $validated['name'];
+        $film->description = $validated['description'];
+        $film->duration = $validated['duration']; 
+        $film->country = $validated['country'];
+        $film->poster = Storage::disk('public')->put('posters', $validated['poster']);
         $film->save();
 
         return redirect()->route('admin.home');
@@ -64,7 +71,6 @@ class FilmController extends Controller
     public function destroy(Film $film, $name)
     {
         $poster = Film::where('name', $name)->value('poster');
-        dd($poster);
         Storage::delete('$poster');
         $film = Film::where('name', $name)->delete();
         return redirect()->route('admin.home');

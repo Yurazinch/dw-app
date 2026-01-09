@@ -43,7 +43,7 @@ hallSizeInputs.forEach(item => {
 	});	
 });
 
-document.querySelector('#chairs-price').addEventListener('click', () => {
+/*document.querySelector('#chairs-price').addEventListener('click', () => {
 	let selectedBox = Array.from(selectorsBox).filter(box => box.classList.contains('checked'));
 	if(selectedBox.length === 0) {
 		alert('Нужно выбрать зал!');		
@@ -78,7 +78,7 @@ document.querySelector('#chairs-price').addEventListener('click', () => {
 	} catch (error) {
 		console.error("Ошибка:", error);
 	}
-});
+});*/
 
 function sendPrices(prices) {
 	try {

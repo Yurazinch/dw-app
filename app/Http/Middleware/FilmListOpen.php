@@ -5,9 +5,8 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Cache;
 
-class SalesIsActive
+class FilmListOpen
 {
     /**
      * Handle an incoming request.
