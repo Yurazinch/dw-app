@@ -59,7 +59,7 @@ class HallPlan extends Component
         }
         Place::where('id', $place['id'])->update(['type' => $this->type]);
         $hall = Hall::find($place['hall_id']);
-        $this->dispatch('hall-selected', $hall);
+        $this->hallselect($hall);
     }
 
     public function render()

@@ -15,9 +15,10 @@ class ShowTicket extends Component
     }
 
     #[On('show-ticket')]
-    public function showTicket()
+    public function showTicket($ticket)
     {
         $this->show = 'block';
+        dd($ticket);
     }
 
     public function render()

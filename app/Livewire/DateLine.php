@@ -13,6 +13,7 @@ class DateLine extends Component
     public function chosenDay($value)
     {
         $this->value = $value;
+        $this->dispatch('date', date: $this->value)->to(MovieInfo::class);
     }
 
     public function boot()

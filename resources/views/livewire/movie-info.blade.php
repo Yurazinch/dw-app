@@ -35,6 +35,13 @@
                             </ul>
                         </div>                
                     @endforeach
+                    @script
+                    <script>
+                        $wire.on('date-null', () => {
+                            alert('Не выбрана дата!');
+                        });
+                    </script>
+                    @endscript
                 @endif
             </section>
         @endforeach
