@@ -18,8 +18,10 @@ class OpenSales extends Component
         $this->sales = ! $this->sales;
         if($this->sales === true) {
             Cache::forever('sales', true);
+            $this->dispatch('opened');
         } else {
             Cache::forget('sales');
+            $this->dispatch('closed');
         }
     }
     

@@ -8,8 +8,7 @@ use App\Http\Controllers\HallController;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\SeanceCreateController;
 use App\Http\Controllers\SeanceController;
-use App\Http\Middleware\SalesIsActive;
-
+//use App\Http\Controllers\QRCodeController;
 
 Route::view('/', 'index')->name('index');
 
@@ -58,3 +57,7 @@ Route::get('/removeseance/{id}', function($id) {
 })->name('seance.toremove');
 
 Route::get('/seance/{id}', [SeanceController::class, 'destroy'])->name('seance.remove');
+
+Route::post('/booking', [BookingController::class], 'store')->name('booking.store');
+
+//Route::get('/generate-qrcode/{ticket}', [QRCodeController::class, 'generate'])->name('qr.code');

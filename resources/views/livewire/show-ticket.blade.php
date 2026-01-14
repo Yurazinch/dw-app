@@ -6,12 +6,12 @@
       </header>
       
       <div class="ticket__info-wrapper">
-        <p class="ticket__info">На фильм: <span class="ticket__details ticket__title">Звёздные войны XXIII: Атака клонированных клонов</span></p>
-        <p class="ticket__info">Места: <span class="ticket__details ticket__chairs">6, 7</span></p>
-        <p class="ticket__info">В зале: <span class="ticket__details ticket__hall">1</span></p>
-        <p class="ticket__info">Начало сеанса: <span class="ticket__details ticket__start">18:30</span></p>
+        <p class="ticket__info">На фильм: <span class="ticket__details ticket__title">{{ $film }}</span></p>
+        <p class="ticket__info">Места: <span class="ticket__details ticket__chairs">{{ $places }}</span></p>
+        <p class="ticket__info">В зале: <span class="ticket__details ticket__hall">{{ $hall }}</span></p>
+        <p class="ticket__info">Дата и начало сеанса: <span class="ticket__details ticket__start">{{ $date }}, {{ $start }}</span></p>
 
-        <img class="ticket__info-qr" src="/images/qr-code.png">
+        <img class="ticket__info-qr" src="{{ $qrCodePath }}">
 
         <p class="ticket__hint">Покажите QR-код нашему контроллеру для подтверждения бронирования.</p>
         <p class="ticket__hint">Приятного просмотра!</p>

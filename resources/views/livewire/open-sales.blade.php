@@ -8,4 +8,14 @@
         <button wire:click="toggle('sales')" class="conf-step__button conf-step__button-accent">{{ $sales ? 'Закрыть' : 'Открыть' }} продажи</button>        
       </div>
     </section>
+    @script
+    <script>
+      $wire.on('opened', () => {          
+          alert('Продажи открыты');
+      });
+      $wire.on('closed', () => {          
+          alert('Продажи закрыты');
+      });
+    </script>
+    @endscript
 </div>

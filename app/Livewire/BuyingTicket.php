@@ -7,6 +7,7 @@ use App\Models\Seance;
 use App\Models\Place;
 use App\Models\Hall;
 use App\Models\Film;
+use App\Models\Booking;
 use Livewire\Attributes\On;
 
 class BuyingTicket extends Component
@@ -22,18 +23,22 @@ class BuyingTicket extends Component
     public $selectedPlaces;
     public $priceStandart;
     public $priceVip;
+    public $bookings;
     public $data = [];
+    public int $seanceId;
 
     public function mount()
     {
         $this->buying = 'none';
         $this->places = [];
         $this->rows = [];
+        $this->bookings = [];
         $this->hallName = '';
         $this->filmName = '';
         $this->seanceStart = '';
         $this->priceStandart = '';
-        $this->priceVip = '';    
+        $this->priceVip = '';
+        $this->seanceId = 0;   
     }
 
     #[On('to-buying')]
@@ -41,6 +46,7 @@ class BuyingTicket extends Component
     {
         $this->buying = 'block';
         $this->seance = $seance;
+        $this->seanceId = $seance['id'];
         $this->seanceDate = $date;
         $this->hallName = Hall::where('id', $this->seance['hall_id'])->value('name');
         $this->filmName = Film::where('id', $this->seance['film_id'])->value('name');
@@ -50,15 +56,19 @@ class BuyingTicket extends Component
         $this->hallPlan();
     }
 
-    #[On('date')]
-    public function addDate($date)
+    #[On('change-date')]
+    public function changeDate()
     {
-        $this->seanceDate = $date;
+        if($this->buying = 'block') {
+            $this->buying = 'none';
+        }
     }
 
-    public function hallPlan() {
+    public function hallPlan() 
+    {
         $this->places = Place::where('hall_id', $this->seance['hall_id'])->get();
         $this->rows = Place::where('hall_id', $this->seance['hall_id'])->groupBy('row')->pluck('row');
+        $this->bookings = Booking::where('seance_id', $this->seance['id'])->where('date', $this->seanceDate)->pluck('place_id')->toArray();
     }
 
     public function select($place)
@@ -87,6 +97,7 @@ class BuyingTicket extends Component
             'seanceDate' => $this->seanceDate,
             'priceStandart' => $this->priceStandart,
             'priceVip' => $this->priceVip,
+            'seanceId' => $this->seanceId,
             'selectedPlaces' => $this->selectedPlaces
         ];    
         $this->dispatch('to-confirm', $this->data)->to(ConfirmTicket::class);        

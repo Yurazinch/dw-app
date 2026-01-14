@@ -14,6 +14,7 @@ class DateLine extends Component
     {
         $this->value = $value;
         $this->dispatch('date', date: $this->value)->to(MovieInfo::class);
+        $this->dispatch('change-date')->to(BuyingTicket::class);
     }
 
     public function boot()

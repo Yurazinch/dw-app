@@ -27,5 +27,5 @@
         </script>
         @endscript
     </nav>
-    <p> Выбрана дата {{ $value }} </p>
+    <!--<p> Выбрана дата {{ $value }} </p>-->
 </div>

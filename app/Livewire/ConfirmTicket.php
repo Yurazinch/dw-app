@@ -7,6 +7,7 @@ use App\Models\Seance;
 use App\Models\Hall;
 use App\Models\Film;
 use App\Models\Place;
+use App\Models\Booking;
 use Livewire\Attributes\On;
 
 class ConfirmTicket extends Component
@@ -22,7 +23,9 @@ class ConfirmTicket extends Component
     public string $chosenChairs;
     public array $prices;
     public int $sum;
+    public int $seance_id;
     public array $toTicket;
+    public array $toBooking;
 
     public function mount()
     {
@@ -34,6 +37,7 @@ class ConfirmTicket extends Component
         $this->chosenChairs = '';
         $this->prices = [];
         $this->sum = 0;
+        $this->seance_id = 0;
     }
 
     #[On('to-confirm')]
@@ -51,13 +55,14 @@ class ConfirmTicket extends Component
         $this->selectDate = $data['seanceDate'];
         $this->priceStandart = $data['priceStandart'];
         $this->priceVip = $data['priceVip'];
+        $this->seance_id = $data['seanceId'];
         $this->confirm = 'block';
         $this->toTicket = [
             'film' => $this->selectFilm,
             'hall' => $this->selectHall,
-            'time' => $this->selectTime,
+            'start' => $this->selectTime,
             'date' => $this->selectDate,
-            'chairs' => $this->chosenChairs,
+            'places' => $this->chosenChairs,
             'sum' => $this->sum,
         ];
     }
@@ -73,11 +78,24 @@ class ConfirmTicket extends Component
         }
     }
 
+    public function setBooking() 
+    {        
+        foreach($this->selectPlaces as $selectPlace) {
+            $toBooking[] = [
+                'seance_id' => $this->seance_id,
+                'place_id' => $selectPlace['id'],
+                'date' => $this->selectDate,
+            ];
+            Booking::insert($toBooking);
+        }
+    }
+
     public function toShow()
     {
         $this->confirm = 'none';
-        $this->dispatch('show-ticket', ticket: $this->toTicket)->to(ShowTicket::class);        
-        $this->resetType();        
+        $this->dispatch('show-ticket', ticket: $this->toTicket)->to(ShowTicket::class);                
+        $this->resetType(); 
+        $this->setBooking();      
     }
 
     public function render()

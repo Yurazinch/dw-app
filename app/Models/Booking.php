@@ -14,7 +14,13 @@ class Booking extends Model
     protected $fillable = [
         'place_id',
         'seance_id',
+        'date',
     ];
+
+    /**     
+     * @var bool
+     */
+    public $timestamps = true;
 
     public function places(): HasMany
     {

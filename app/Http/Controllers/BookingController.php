@@ -8,27 +8,13 @@ use Illuminate\Http\Request;
 class BookingController extends Controller
 {
     /**
-     * Отобразить список ресурса.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Показать форму создания нового ресурса.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Сохранить вновь созданный ресурс в хранилище.
      */
     public function store(Request $request)
     {
-        //
+        $validated  = request->validate();
+        dd($validated);
+        //Booking::insert($request->toBooking);
     }
 
     /**
