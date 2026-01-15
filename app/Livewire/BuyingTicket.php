@@ -56,13 +56,13 @@ class BuyingTicket extends Component
         $this->hallPlan();
     }
 
-    #[On('change-date')]
+    /*#[On('change-date')]
     public function changeDate()
     {
         if($this->buying = 'block') {
             $this->buying = 'none';
         }
-    }
+    }*/
 
     public function hallPlan() 
     {
