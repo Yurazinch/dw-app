@@ -40,6 +40,9 @@
                         $wire.on('date-null', () => {
                             alert('Не выбрана дата!');
                         });
+                        $wire.on('time-left', () => {
+                            alert('На этот сеанс уже нельзя купить билет');
+                        });
                     </script>
                     @endscript
                 @endif

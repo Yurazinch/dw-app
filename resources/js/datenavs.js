@@ -2,7 +2,10 @@ const dayMenu = [];
 
 function dateMenu(today, step) {
   let nextDay, dayNumber, dayName;
-  const optionsDay = {day: 'numeric'};
+  const optionsDay = {
+    month: "long",
+    day: 'numeric',
+  };
   const optionsWeek = {weekday: 'short'}
   for(let i = 0 + step; i < 7 + step; ++i) {
     nextDay = new Date(today.getTime() + i * 86400000);
