@@ -27,7 +27,7 @@ class HallController extends Controller
     public function store(Request $request): RedirectResponse
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name' => 'required|string|lowercase|unique:halls,name|max:25',
         ]);
         
         $hall = new Hall;
@@ -63,9 +63,9 @@ class HallController extends Controller
     /**
      * Удалить указанный ресурс из хранилища.
      */
-    public function destroy(Hall $hall, $name)
+    public function destroy($id)
     {
-        $hall = Hall::where('name', $name)->delete();
+        $hall = Hall::where('id', $id)->delete();
         return redirect()->route('admin.home');
     }
 

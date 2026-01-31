@@ -16,7 +16,7 @@
         </label>
         <label class="conf-step__label conf-step__label-fullsize">
         Время начала            
-            <input class="conf-step__input" type="time" value="" name="start_time" wire:model="value" required readonly/>
+            <input class="conf-step__input" type="time" value="" name="start_time" wire:model="nextStart" required readonly/>
         </label>
 
         <div class="conf-step__buttons text-center">

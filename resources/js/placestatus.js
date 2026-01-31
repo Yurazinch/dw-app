@@ -43,6 +43,7 @@ hallSizeInputs.forEach(item => {
 	});	
 });
 
+// Реализовал в комплоненте livewire
 /*document.querySelector('#chairs-price').addEventListener('click', () => {
 	let selectedBox = Array.from(selectorsBox).filter(box => box.classList.contains('checked'));
 	if(selectedBox.length === 0) {
@@ -182,51 +183,67 @@ function sendChairs(chairs) {
 	}
 }
 
-Array.from(filmBoxes.children).forEach(filmBox => filmBox.addEventListener('dragstart', (e) => {
-	e.dataTransfer.setData('text/plain', filmBox.children[2].textContent);
+Array.from(filmBoxes.children).forEach(filmBox => filmBox.addEventListener('dragstart', (e) => {	
+	e.dataTransfer.setData('text/plain', `${filmBox.children[2].textContent}, ${filmBox.children[3].textContent}`);
 }));
 
 Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('dragover', (e) => e.preventDefault()));
 
+let start;
 Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) => {
-	const film = e.dataTransfer.getData('text');
-	const targetEl = Array.from(timeLine.children).filter(el => el === e.target);
-	if(targetEl.length > 0) {
-		targetEl[0].insertAdjacentHTML('afterbegin', `<p class="conf-step__seances-movie-title">${film}</p>`);
-	} else {
-		alert('Фильм уже добавлен!');
-	}
+	const existEls = Array.from(e.target.children);
+	const film = e.dataTransfer.getData('text').split(',');	
+	const filmName = film[0];
+	const filmDuration = film[1].trim().split(' ')[0];
+	const draggableElement = document.getElementById('id');
+	let width = Math.ceil(parseInt(filmDuration) * 0.75);
+	const hallName = e.target.previousElementSibling.textContent;
+	function getStart() {
+		if(existEls.length === 0) {
+			start = '08:00';
+		} else {
+			let prevStart = existEls[existEls.length - 1].children[1].innerText;
+			let prevDuration = Math.floor(parseInt(existEls[existEls.length - 1].style.width) / 0.75);			
+			let time = prevStart.split(':');			
+			let minutes = parseInt(time[0]) * 60 + parseInt(time[1]);
+			let nextStart = minutes + prevDuration + 10;			
+			let hours = Math.floor(nextStart / 60);
+			let mins = Math.floor(nextStart % 60);
+			if(hours < 10 && mins < 10) {
+				start = `0${hours}:0${mins}`;
+			} else if(hours < 10 && mins >= 10) {
+				start = `0${hours}:${mins}`;
+			} else if(hours >= 10 && mins < 10) {
+				start = `${hours}:0${mins}`;
+			} else {
+				start = `${hours}:${mins}`;
+			}
+		}
+	}	
+	getStart();
+	e.target.insertAdjacentHTML('beforeend', 
+		`<div class="conf-step__seances-movie" style="width: ${width}px; background-color: rgb(202, 255, 133);">
+			<p class="conf-step__seances-movie-title">${filmName}</p>
+			<p class="conf-step__seances-movie-start">${start}</p>
+		</div>`
+	);
+	seances.push({
+		hall: hallName,
+		film: filmName,
+		start: start,
+		width: width
+	});	
+	console.log(seances);
 	e.dataTransfer.clearData();
 }));
 
-window.addEventListener('load', () => {
-	Array.from(timeBoxes).forEach(timeBox => {
-		if(timeBox.children.length > 1) {			
-			timeBox.removeAttribute('wire:click');			
-		}
-	});
-	seances = [];
-});
-
-document.getElementById('saveSeances').addEventListener('click', () => {
-	const formData = new FormData();
-	Array.from(timeBoxes).forEach((timeBox, index) => {
-		if(timeBox.children.length === 2 && !timeBox.lastElementChild.hasAttribute('wire:key')) {
-			let hallName = timeBox.closest('.conf-step__seances-hall').firstElementChild.textContent;
-			let filmName = timeBox.firstElementChild.textContent;
-			let start = timeBox.lastElementChild.textContent;
-			seances.push({
-				hall: hallName,
-				film: filmName,
-				start: start
-			});
-		}
-	});
-		
+document.getElementById('saveSeances').addEventListener('click', () => {			
 	if(seances.length === 0) {
 		alert('Нет добавленных новых сеансов!');
-	}	
-	sendData(seances);
+	} else {	
+		sendData(seances);	
+		seances = [];
+	}
 });
 
 function sendData(seances) {

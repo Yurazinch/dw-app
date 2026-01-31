@@ -17,7 +17,7 @@ return new class extends Migration
             $table->integer('row'); //номер ряда
             $table->integer('place'); //номер места в ряду
             $table->string('type')->default('disabled');
-            $table->string('price')->default('0'); //цена места
+            $table->integer('price')->default(0); //цена места
             $table->timestamps();
         });
     }

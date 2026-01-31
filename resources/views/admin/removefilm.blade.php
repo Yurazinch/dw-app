@@ -26,8 +26,8 @@
         </h2>
       </div>
       <div class="popup__wrapper">
-        <form action="{{ route('film.remove', ['name' => $name])}}" method="get" accept-charset="utf-8">
-          <p class="conf-step__paragraph">Вы действительно хотите удалить фильм <span>"{{ $name }}"</span>?</p>
+        <form action="{{ route('film.remove', ['id' => $film->id])}}" method="get" accept-charset="utf-8">
+          <p class="conf-step__paragraph">Вы действительно хотите удалить фильм <span>"{{ $film->name }}"</span>?</p>
           <div class="conf-step__buttons text-center">
             <input type="submit" value="Удалить" class="conf-step__button conf-step__button-accent">
             <a href="{{ route('admin.home') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>

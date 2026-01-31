@@ -17,6 +17,7 @@ class Seance extends Model
         'hall_id',
         'film_id',
         'start',
+        'width',
     ]; 
     
     protected $hidden = [

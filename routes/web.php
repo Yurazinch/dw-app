@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Hall;
+use App\Models\Film;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HallController;
@@ -26,10 +28,10 @@ Route::get('/hall/create', [HallController::class, 'create'])->name('hall.create
 
 Route::post('/hall', [HallController::class, 'store'])->name('hall.store');
 
-Route::get('/hall/{name}', [HallController::class, 'destroy'])->name('hall.remove');
+Route::get('/hall/{id}', [HallController::class, 'destroy'])->name('hall.remove');
 
-Route::get('/removehall/{name}', function($name) {
-    return view('admin/removehall', ['name' => $name]);
+Route::get('/removehall/{hall}', function(Hall $hall) {
+    return view('admin/removehall', ['hall' => $hall]);
 })->name('hall.toremove');
 
 Route::get('/removeplan/{id}', [HallController::class, 'plandestroy'])->name('plan.remove');
@@ -38,11 +40,11 @@ Route::get('/film/create', [FilmController::class, 'create'])->name('film.create
 
 Route::post('/film', [FilmController::class, 'store'])->name('film.store');
 
-Route::get('/removefilm/{name}', function($name) {
-    return view('admin/removefilm', ['name' => $name]);
+Route::get('/removefilm/{film}', function(Film $film) {
+    return view('admin/removefilm', ['film' => $film]);
 })->name('film.toremove');
 
-Route::get('/film/{name}', [FilmController::class, 'destroy'])->name('film.remove');
+Route::get('/film/{id}', [FilmController::class, 'destroy'])->name('film.remove');
 
 Route::get('/seance/create', [SeanceCreateController::class, 'createseance'])->name('seance.create');
 

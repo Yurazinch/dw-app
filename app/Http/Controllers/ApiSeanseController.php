@@ -25,6 +25,7 @@ class ApiSeanseController extends Controller
             'hall_id' => Hall::where('name', $seance['hall'])->value('id'),
             'film_id' => Film::where('name', $seance['film'])->value('id'),
             'start' => $seance['start'],
+            'width' => $seance['width'],
             ];
         }
         return Seance::insert($data);

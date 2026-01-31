@@ -4,7 +4,7 @@
             <p class="conf-step__paragraph">Залы не добавлены!</p>
         @else
             @foreach($halls as $hall)
-                <li wire:key="{{ $hall->id }}"> {{ $hall->name }} <a href="{{ route('hall.toremove', ['name' => $hall->name]) }}">
+                <li wire:key="{{ $hall->id }}"> {{ $hall->name }} <a href="{{ route('hall.toremove', ['hall' => $hall]) }}">
                     <button class="conf-step__button conf-step__button-trash"></button></a>
                 </li>
             @endforeach   

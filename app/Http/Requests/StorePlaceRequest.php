@@ -27,7 +27,7 @@ class StorePlaceRequest extends FormRequest
             'chairs.*.row' => 'required|integer',
             'chairs.*.place' => 'required|integer',
             'chairs.*.type' => 'required|string',
-            'chairs.*.price' => 'required|decimal:0,2',
+            'chairs.*.price' => 'required|integer|min:0',
         ];
     }
 }

@@ -26,6 +26,7 @@ class SeanceController extends Controller
         $seance->hall_id = Hall::where('name', $validated['hall'])->value('id');
         $film = Film::where('name', $validated['film'])->firstOrFail();
         $seance->film_id = $film->id;
+        $seance->width = $film->duration * 0.75;
         $seance->start = $validated['start_time'];
         $seance->save();
         

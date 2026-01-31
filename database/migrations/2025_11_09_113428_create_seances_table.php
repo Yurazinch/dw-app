@@ -16,6 +16,7 @@ return new class extends Migration
             $table->integer('hall_id');
             $table->integer('film_id');
             $table->time('start');
+            $table->integer('width')->default(0);
             $table->timestamps();
         });
     }

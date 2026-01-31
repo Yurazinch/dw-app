@@ -11,14 +11,14 @@ use Illuminate\Http\Request;
 class CreateSeance extends Component
 {
     public $films;
-    public $name;  
-    public $value;
+    public $name;
+    public $nextStart;
     
     public function boot(Request $request)
-    {        
+    { 
         $this->name = Hall::findOrFail($request->id)->name;
         $this->films = Film::get();
-        $this->value = $request->value;
+        $this->nextStart = $request->start;
     }
     
     public function render()

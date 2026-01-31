@@ -22,10 +22,11 @@ class FilmController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        
         $validated = $request->validate([
-            'name' => ['required', 'string', 'min:3', 'max:50'],
-            'description' => ['required', 'string', 'min:3', 'max:225'],
-            'duration' => ['required', 'string', 'min:2', 'max:3'],
+            'name' => ['required', 'string', 'unique:films,name', 'min:3', 'max:50'],
+            'description' => ['required', 'string', 'min:3'],
+            'duration' => ['required', 'integer', 'gt:0'],
             'country' => ['required', 'string', 'min:3', 'max:50'],
             'poster' => ['required', 'image'],
         ]);
@@ -68,11 +69,11 @@ class FilmController extends Controller
     /**
      * Удалить указанный ресурс из хранилища.
      */
-    public function destroy(Film $film, $name)
+    public function destroy($id)
     {
-        $poster = Film::where('name', $name)->value('poster');
+        $poster = Film::where('id', $id)->value('poster');
         Storage::delete('storage/$poster');
-        $film = Film::where('name', $name)->delete();
+        $film = Film::where('id', $id)->delete();
         return redirect()->route('admin.home');
     }
 }

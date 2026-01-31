@@ -13,17 +13,7 @@ class TimeLine extends Component
     public $halls;
     public $films;   
     public $seances;
-
-    public array $timeline = [ 
-        '08:00', 
-        '10:00', 
-        '12:00', 
-        '14:00', 
-        '16:00', 
-        '18:00', 
-        '20:00',
-        '22:00', 
-    ];   
+    public $nextStart;
 
     #[On('reload')]
     public function boot()
@@ -31,11 +21,12 @@ class TimeLine extends Component
         $this->seances = Seance::get();
         $this->films = Film::get();
         $this->halls = Hall::get();
+        $this->nextStart = '08:00';
     }
     
-    public function addform($id, $value) 
+    public function addform($id, $start) 
     {
-        return redirect()->route('seance.create', ['id' => $id, 'value' => $value]);
+        return redirect()->route('seance.create', ['id' => $id, 'start' => $start]);
     }
 
     public function removeform($id)

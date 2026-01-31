@@ -24,9 +24,10 @@ class StoreSeanceRequest extends FormRequest
     {
         return [
             'seances' => 'array',
-            'seances.*.hall' => 'required|string',
-            'seances.*.film' => 'required|string',
+            'seances.*.hall' => 'required|string|min:1',
+            'seances.*.film' => 'required|string|min:3',
             'seances.*.start' => ['required', Rule::date()->format("H:i")],
+            'seances.*.width' => 'required|integer|min:0',
         ];
     }
 }

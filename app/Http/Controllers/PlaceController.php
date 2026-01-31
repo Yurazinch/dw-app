@@ -25,7 +25,7 @@ class PlaceController extends Controller
             'row' => 'required|int',
             'place' => 'required|int',
             'status' => 'required|string|max:225',
-            'price' => 'required|decimal|nullable',
+            'price' => 'nullable|integer|gt:0',
         ]);
         
         $place = new Place;
@@ -49,7 +49,7 @@ class PlaceController extends Controller
     /**
      * Обновить указанный ресурс в хранилище.
      */
-    public function update(PlaceRequest $request, Place $place)
+    public function update(Request $request, Place $place)
     {
         $place->fill($request->validated());
         return $place->save();

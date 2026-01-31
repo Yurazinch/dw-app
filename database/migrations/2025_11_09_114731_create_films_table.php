@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('name')->default(''); //название
             $table->string('description')->default(''); //описание
             $table->string('country')->default(''); //страна
-            $table->time('duration'); //длительность (мин.)
+            $table->integer('duration')->defaul(0); //длительность (мин.)
             $table->string('poster'); //ссылка на постер
             $table->timestamps();
         });

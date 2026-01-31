@@ -28,8 +28,13 @@
           @csrf
           <label class="conf-step__label conf-step__label-fullsize" for="add-hall">
             Название зала
-            <input id="add-hall" class="conf-step__input" type="text" placeholder="Например, &laquo;Зал 1&raquo;" name="name" autocomplete="off" required>
+            <input id="add-hall" class="conf-step__input" type="text" placeholder="Например, &laquo;зал 1&raquo; (в нижнем регистре)" name="name" autocomplete="off" required>
           </label>
+          @error('add-hall')
+            <div class="conf-step__label conf-step__label-fullsize">
+              {{ $message }}
+            </div>
+          @enderror
           <div class="conf-step__buttons text-center">
             <input type="submit" value="Добавить зал" class="conf-step__button conf-step__button-accent" data-event="hall_add">
             <a href="{{ route('admin.home') }}"><button class="conf-step__button conf-step__button-regular" type="button">Отменить</button></a>

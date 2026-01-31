@@ -25,6 +25,7 @@ class UpdateSeanceRequest extends FormRequest
             'hall' => 'required|string|min:3|max:225',
             'film' => 'required|string|min:3|max:225',
             'start' => ['required', Rule::date()->format("H:i")],
+            'width' => 'required|integer|min:0',
         ];
     }
 }

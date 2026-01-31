@@ -47,7 +47,7 @@ class MovieInfo extends Component
 
     public function toBuying($seance)
     {
-        if($this->date === null) {  // нужна проверка времени сеанса, чтобы не продавать на прошедшее время
+        if($this->date === null) {
             $this->dispatch('date-null');
         } elseif($this->date === $this->currentDate && $seance['start'] < $this->currentTime) {
             $this->dispatch('time-left');

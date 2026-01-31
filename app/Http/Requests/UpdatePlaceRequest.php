@@ -24,7 +24,7 @@ class UpdatePlaceRequest extends FormRequest
         return [
             'chairs' => 'array',
             'chairs.*.type' => 'required|string',
-            'chairs.*.price' => 'required|string',
+            'chairs.*.price' => 'required|iteger|min:0',
         ];
     }
 }

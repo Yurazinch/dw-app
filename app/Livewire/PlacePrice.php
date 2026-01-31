@@ -5,6 +5,7 @@ namespace App\Livewire;
 use Livewire\Component;
 use App\Models\Hall;
 use App\Models\Place;
+use Livewire\Attributes\Validate;
 
 class PlacePrice extends Component
 {
@@ -12,10 +13,15 @@ class PlacePrice extends Component
     public string $class;
     public string $class_checked;
     public $hall_hit;
-    public $price_standart;
-    public $price_vip;
     public $message;
     public $disabled;
+
+    #[Validate('required|integer|min:0')]
+    public $price_standart;
+
+    #[Validate('required|integer|min:0')]
+    public $price_vip;
+    
 
     public function mount()
     {
@@ -30,8 +36,8 @@ class PlacePrice extends Component
     public function hithall($hall)
     {        
         $this->hall_hit = $hall['id'];
-        $this->price_standart = '0';
-        $this->price_vip = '0';
+        $this->price_standart = 0;
+        $this->price_vip = 0;
         $this->show();
     }
 
@@ -56,6 +62,7 @@ class PlacePrice extends Component
 
     public function save()
     {
+        $this->validate();
         if($this->hall_hit > 0) {
             Place::where('hall_id', $this->hall_hit)->where('type', 'standart')->update(['price' => $this->price_standart]);
             Place::where('hall_id', $this->hall_hit)->where('type', 'vip')->update(['price' => $this->price_vip]);
