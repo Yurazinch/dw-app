@@ -87,8 +87,9 @@
         </fieldset>  
       </div>
     </section>
-    
-    <livewire:open-sales />    
+    <section class="conf-step">
+      <livewire:open-sales />
+    </section>
   </main>
   @vite(['resources/js/accordeon.js', 'resources/js/placestatus.js'])
 </body>

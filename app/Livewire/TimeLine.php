@@ -15,7 +15,6 @@ class TimeLine extends Component
     public $seances;
     public $nextStart;
 
-    #[On('reload')]
     public function boot()
     {
         $this->seances = Seance::get();
@@ -24,9 +23,10 @@ class TimeLine extends Component
         $this->nextStart = '08:00';
     }
     
-    public function addform($id, $start) 
+    #[On('reload')]
+    public function loaded() 
     {
-        return redirect()->route('seance.create', ['id' => $id, 'start' => $start]);
+        $this->dispatch('loaded');
     }
 
     public function removeform($id)
