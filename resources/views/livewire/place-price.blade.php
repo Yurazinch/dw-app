@@ -22,10 +22,12 @@
     <div class="conf-step__legend">
         <label class="conf-step__label">Цена, рублей<input wire:model="price_standart" type="text" name="standart" class="conf-step__input conf-step__input-price" value="{{$price_standart}}"></label>
         за <span class="conf-step__chair conf-step__chair_standart"></span> обычные кресла
+        <div style="color: red;">@error('price_standart') {{$message}} @enderror</div>
     </div>  
     <div class="conf-step__legend">
         <label class="conf-step__label">Цена, рублей<input wire:model="price_vip" type="text" name="vip" class="conf-step__input conf-step__input-price" value="{{$price_vip}}"></label>
         за <span class="conf-step__chair conf-step__chair_vip"></span> VIP кресла
+        <div style="color: red;">@error('price_vip') {{$message}} @enderror</div>
     </div>  
     
     <fieldset class="conf-step__buttons text-center">
