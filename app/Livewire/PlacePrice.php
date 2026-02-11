@@ -9,33 +9,37 @@ use Livewire\Attributes\Validate;
 
 class PlacePrice extends Component
 {
-    public $halls;
-    public string $class;
-    public string $class_checked;
+    public $hals;
+    public string $classp;
+    public string $classp_checked;
     public $hall_hit;
     public $message;
     public $disabled;
 
-    #[Validate('required|integer|min:0')]
+    #[Validate('required', message: 'Поле не может быть пустым')]
+    #[Validate('integer', message: 'Введите целое число')]
+    #[Validate('min:1', message: 'Число должно быть больше 0')]
     public $price_standart;
 
-    #[Validate('required|integer|min:0')]
+    #[Validate('required', message: 'Поле не может быть пустым')]
+    #[Validate('integer', message: 'Введите целое число')]
+    #[Validate('min:1', message: 'Число должно быть больше 0')]
     public $price_vip;
     
 
     public function mount()
     {
-        $this->halls = Hall::get();
-        $this->class = 'conf-step__radio';
-        $this->class_checked = 'conf-step__radio checked';
+        $this->hals = Hall::get();
+        $this->classp = 'conf-step__radio';
+        $this->classp_checked = 'conf-step__radio checked';
         $this->price_standart = '';
         $this->price_vip = '';
         $this->message = '';
     }
 
-    public function hithall($hall)
+    public function hithall($id)
     {        
-        $this->hall_hit = $hall['id'];
+        $this->hall_hit = $id;
         $this->price_standart = 0;
         $this->price_vip = 0;
         $this->show();

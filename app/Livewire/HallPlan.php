@@ -19,7 +19,7 @@ class HallPlan extends Component
     #[On('hall-selected')]
     public function hallselect($hall)
     {   
-        $this->hall_id = $hall['id'];        
+        $this->hall_id = $hall;        
         $count = Place::where('hall_id', $this->hall_id)->get()->modelKeys();              
         if($count !== []) {
             $this->places = Place::where('hall_id', $this->hall_id)->get();

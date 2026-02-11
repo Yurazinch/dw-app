@@ -4,12 +4,12 @@
             <p class="conf-step__paragraph">Залы не добавлены!</p>
         @else
             @foreach($halls as $hall)
-                <li wire:key="{{ $hall->id }}">
+                <li wire:key="{{ $loop->iteration }}">
                     @if($hall->id === $hall_checked)
-                        <input wire:click="activehall({{ $hall }})" type="radio" class="{{ $class_checked }}" name="chairs-hall" value="{{ $hall->name }}">
+                        <input wire:click="activehall({{ $hall->id }})" type="radio" class="{{ $class_checked }}" name="chairs-hall" value="{{ $hall->name }}">
                         <span class="conf-step__selector">{{ $hall->name }}</span>
                     @else
-                        <input wire:click="activehall({{ $hall }})" type="radio" class="{{ $class }}" name="chairs-hall" value="{{ $hall->name }}">
+                        <input wire:click="activehall({{ $hall->id }})" type="radio" class="{{ $class }}" name="chairs-hall" value="{{ $hall->name }}">
                         <span class="conf-step__selector">{{ $hall->name }}</span>
                     @endif
                 </li>                

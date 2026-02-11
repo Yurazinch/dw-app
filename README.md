@@ -56,7 +56,41 @@ Zend Engine v4.4.10, Copyright (c) Zend Technologies.
     npm install
     npm run dev
 
-10. Запустите локальный сервер разработки:
+10. Активируйте символические ссылки.
+    php artisan storage:link
+
+11. Установить Imagick
+
+*Для Linux*
+    - Установите библиотеки ImageMagick:
+    sudo apt update
+    sudo apt install imagemagick
+    - Установите пакет расширений PHP Imagick:
+    Используйте apt для установки расширения, соответствующего вашей конкретной версии PHP (например, php8.1-imagick).
+    sudo apt install php-imagick
+    или конкретно для определенной версии, например: sudo apt install php8.1-imagick
+    - Включите расширение (если оно не активируется автоматически):
+    Обычно установка включает расширение и добавляет параметр extension=imagick.so в соответствующий файл php.ini или в конфигурационный файл в папке mods-available.
+    - Перезапустите веб-сервер или PHP-FPM:
+    sudo service apache2 restart
+    or
+    sudo service nginx restart
+    or
+    sudo service php8.1-fpm restart
+
+*Для Windows*
+    - Перейти: http://pecl.php.net/package/imagick
+    - Выбрать последнюю стабильную версию, перейти по ссылке DLL
+    - Выбрать подходящий вариант (версия PHP, Thread Safe, Non Thread Safe, x86, x64)
+    - По выбранной ссылке скачать zip-архив, распаковать и копировать "php_imagick.dll" в папку расширений PHP: /php/ext/
+    Примечание: этот ZIP-архив также содержит DLL-файлы, которые во многих руководствах рекомендуется извлечь в папку расширений Apache. ЭТОГО ДЕЛАТЬ НЕ НУЖНО.
+    - Отредактируйте файл "php.ini" и разкомментируйте (или добавьте в раздел Dynamic Extensions):
+    extension=php_imagick.dll
+    Важно! Чтобы не возникало ошибок при проверке версии Imagick включите в php.ini директиву
+    imagick.skip_version_check=true (я прописал внизу extension где размещается директива php_imagick.dll)
+    - Перезапустите сервер.
+
+12. Запустите локальный сервер разработки:
     - Выполните команду:
     composer run dev (в браузере откроется адрес http://localhost:8000/).
     Для перехода на страницу администратора нужно ввести адрес http://localhost:8000/admin . Логин и пароль администратора см. п.8.

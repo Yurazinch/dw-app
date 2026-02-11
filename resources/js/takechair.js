@@ -39,5 +39,4 @@ function takenChair() {
 const button = document.querySelector('.acceptin-button');
 button.addEventListener('click', () => {
 	takenChair();
-	console.log(chair);
 });

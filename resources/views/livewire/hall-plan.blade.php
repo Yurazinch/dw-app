@@ -20,7 +20,7 @@
     
     <fieldset class="conf-step__buttons text-center">
       <button class="conf-step__button conf-step__button-regular">Отмена</button>
-      <input type="submit" id="chairs-plan" value="Сохранить" class="conf-step__button conf-step__button-accent">
+      <button id="chairs-plan" class="conf-step__button conf-step__button-accent">Сохранить</button>
     </fieldset>
   </div>
 

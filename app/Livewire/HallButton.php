@@ -12,10 +12,10 @@ class HallButton extends Component
     public string $class_checked;
     public int $hall_checked;
 
-    public function activehall($hall)
+    public function activehall($id)
     {        
-        $this->dispatch('hall-selected', hall: $hall);
-        $this->hall_checked = $hall['id'];
+        $this->dispatch('hall-selected', hall: $id);
+        $this->hall_checked = $id;
     }
 
     public function mount()
