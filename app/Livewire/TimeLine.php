@@ -29,6 +29,10 @@ class TimeLine extends Component
         $this->dispatch('loaded');
     }
 
+    public function createform($id) {
+        return redirect()->route('seance.create', ['id' => $id]);
+    }
+
     public function removeform($id)
     {
         return redirect()->route('seance.toremove', ['id' => $id]);

@@ -426,8 +426,7 @@ input[type='radio'], input[type='submit'], button, .conf-step__header, select {
   text-transform: uppercase; }
 
 .conf-step__seances-timeline {
-  /*position: relative;*/
-  display: flex;
+  position: relative;  
   outline: 1px solid #848484;
   padding: 10px 3px;
   height: 40px;
@@ -435,7 +434,7 @@ input[type='radio'], input[type='submit'], button, .conf-step__header, select {
   width: calc(1440px * 0.5); }
 
 .conf-step__seances-movie {
-  position: relative;
+  position: absolute;
   height: 40px;
   border: 1px solid rgba(0, 0, 0, 0.3);
   box-sizing: border-box;
@@ -446,7 +445,7 @@ input[type='radio'], input[type='submit'], button, .conf-step__header, select {
   line-height: 10px;
   height: 100%; }
 .conf-step__seances-movie .conf-step__seances-movie-start {
-  position: absolute;
+  position: relative;
   bottom: -33px;
   left: -14px;
   color: #848484;

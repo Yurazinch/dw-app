@@ -141,9 +141,9 @@ Array.from(filmBoxes.children).forEach(filmBox => filmBox.addEventListener('drag
 Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('dragover', (e) => e.preventDefault()));
 
 let start;
+let left;
 Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) => {
 	const existEls = Array.from(e.target.children);
-	console.log(existEls);
 	existEls.forEach((existEl, index) => {
 		if(index < existEls.length - 1) {
 			existEl.removeAttribute("wire:click");
@@ -158,17 +158,21 @@ Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) 
 	function getStart() {
 		if(existEls.length === 0) {
 			start = '08:00';
+			left = 0;
 		} else {
 			let prevStart = existEls[existEls.length - 1].children[1].innerText;
 			let prevDuration = Math.floor(parseInt(existEls[existEls.length - 1].style.width) / 0.75);			
 			let time = prevStart.split(':');			
 			let minutes = parseInt(time[0]) * 60 + parseInt(time[1]);
-			let nextStart = minutes + prevDuration + 10;			
+			let minutesLeft = (parseInt(time[0]) - 8) * 60 + parseInt(time[1]);
+			let nextStart = minutes + prevDuration;	
 			let hours = Math.floor(nextStart / 60);
-			let mins = Math.floor(nextStart % 60);
-			if(hours >= 24) {
-				alert('Линейка сеансов заполнена');
-			} else if(hours < 10 && mins < 10) {
+			let mins = Math.round((nextStart % 60) / 10) * 10;
+			if(mins === 60) {
+				hours = hours + 1;
+				mins = 0;
+			}
+			if(hours < 10 && mins < 10) {
 				start = `0${hours}:0${mins}`;
 			} else if(hours < 10 && mins >= 10) {
 				start = `0${hours}:${mins}`;
@@ -177,11 +181,16 @@ Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) 
 			} else {
 				start = `${hours}:${mins}`;
 			}
+			left = Math.round((minutesLeft + prevDuration) * 0.75);
+			if(left > 1440 * 0.5) {
+				alert('Линейка сеансов будет переполнена!');				
+			}
+			console.log(left);
 		}
 	}	
 	getStart();
 	e.target.insertAdjacentHTML('beforeend', 
-		`<div class="conf-step__seances-movie" style="width: ${width}px; background-color: rgb(202, 255, 133);">
+		`<div class="conf-step__seances-movie" style="width: ${width}px; background-color: rgb(202, 255, 133); left: ${left}px;">
 			<p class="conf-step__seances-movie-title">${filmName}</p>
 			<p class="conf-step__seances-movie-start">${start}</p>
 		</div>`
@@ -190,7 +199,8 @@ Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) 
 		hall: hallName,
 		film: filmName,
 		start: start,
-		width: width
+		width: width,
+		left: left
 	});	
 	console.log(seances);
 	e.dataTransfer.clearData();

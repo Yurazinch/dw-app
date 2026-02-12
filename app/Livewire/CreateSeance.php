@@ -12,13 +12,11 @@ class CreateSeance extends Component
 {
     public $films;
     public $name;
-    public $nextStart;
     
     public function boot(Request $request)
     { 
         $this->name = Hall::findOrFail($request->id)->name;
         $this->films = Film::get();
-        $this->nextStart = $request->start;
     }
     
     public function render()

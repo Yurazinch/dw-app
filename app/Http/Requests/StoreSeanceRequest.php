@@ -28,6 +28,7 @@ class StoreSeanceRequest extends FormRequest
             'seances.*.film' => 'required|string|min:3',
             'seances.*.start' => ['required', Rule::date()->format("H:i")],
             'seances.*.width' => 'required|integer|min:0',
+            'seances.*.left' => 'required|integer|min:0',
         ];
     }
 }

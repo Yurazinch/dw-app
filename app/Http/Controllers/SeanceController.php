@@ -28,6 +28,8 @@ class SeanceController extends Controller
         $seance->film_id = $film->id;
         $seance->width = $film->duration * 0.75;
         $seance->start = $validated['start_time'];
+        $time = explode(':', $validated['start_time']);
+        $seance->left = ((intval($time[0]) - 8) * 60 + intval($time[1])) * 0.75;
         $seance->save();
         
         return redirect()->route('admin.home');

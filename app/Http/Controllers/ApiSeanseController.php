@@ -26,6 +26,7 @@ class ApiSeanseController extends Controller
             'film_id' => Film::where('name', $seance['film'])->value('id'),
             'start' => $seance['start'],
             'width' => $seance['width'],
+            'left' => $seance['left'],
             ];
         }
         return Seance::insert($data);
