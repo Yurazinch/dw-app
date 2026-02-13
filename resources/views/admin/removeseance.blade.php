@@ -22,7 +22,7 @@
         <div class="popup__header">
           <h2 class="popup__title">
             Снятие с сеанса
-            <a class="popup__dismiss" href="{{ route('admin.home') }}"><img src="/images/close-admin.png" alt="Закрыть"></a>
+            <a class="popup__dismiss" href="{{ route('admin.home') }}"><img src="{{ asset('images/close-admin.png') }}" alt="Закрыть"></a>
           </h2>
         </div>
         <livewire:seance-remove />

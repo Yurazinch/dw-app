@@ -7,7 +7,7 @@
       
       <div class="ticket__info-wrapper">        
 
-        <img class="ticket__info-qr" src="/images/zakryto.jpg">
+        <img class="ticket__info-qr" src="{{ asset('images/zakryto.jpg') }}">
 
         <p class="ticket__hint">Вас ожидает что-то очень увлекательное.</p>
         <p class="ticket__hint">Загляните к нам через часик!</p>

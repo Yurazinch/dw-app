@@ -45,6 +45,6 @@
     </section>
   </main>
 
-  <script src="js/accordeon.js"></script>
+  <!--<script src="js/accordeon.js"></script>-->
 </body>
 </html>
