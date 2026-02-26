@@ -58,7 +58,8 @@ class HallPlan extends Component
             $this->type = 'disabled';
         }
         Place::where('id', $place['id'])->update(['type' => $this->type]);
-        $hall = Hall::find($place['hall_id']);
+        $activeHall = Hall::find($place['hall_id']);
+        $hall = $activeHall->id;
         $this->hallselect($hall);
     }
 

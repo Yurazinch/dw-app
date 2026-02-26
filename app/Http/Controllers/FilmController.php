@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Film;
-use Illuminate\Http\Request;
+use App\Http\Requests\FilmCreateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
 
@@ -20,22 +20,15 @@ class FilmController extends Controller
     /**
      * Сохранить вновь созданный ресурс в хранилище.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(FilmCreateRequest $request): RedirectResponse
     {
         
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'unique:films,name', 'min:3', 'max:50'],
-            'description' => ['required', 'string', 'min:3'],
-            'duration' => ['required', 'integer', 'gt:0'],
-            'country' => ['required', 'string', 'min:3', 'max:50'],
-            'poster' => ['required', 'image'],
-        ]);
         $film = new Film;
-        $film->name = $validated['name'];
-        $film->description = $validated['description'];
-        $film->duration = $validated['duration']; 
-        $film->country = $validated['country'];
-        $film->poster = Storage::disk('public')->put('posters', $validated['poster']);
+        $film->name = $request->name;
+        $film->description = $request->description;
+        $film->duration = $request->duration; 
+        $film->country = $request->country;
+        $film->poster = Storage::disk('public')->put('posters', $request->poster);
         $film->save();
 
         return redirect()->route('admin.home');

@@ -22,17 +22,30 @@ class SeanceController extends Controller
             'start_time' => ['required', Rule::date()->format("H:i")],
         ]);
 
-        $seance = new Seance;
-        $seance->hall_id = Hall::where('name', $validated['hall'])->value('id');
         $film = Film::where('name', $validated['film'])->firstOrFail();
-        $seance->film_id = $film->id;
-        $seance->width = $film->duration * 0.75;
-        $seance->start = $validated['start_time'];
+        $hall_id = Hall::where('name', $validated['hall'])->value('id');
+        $width = intval(ceil(($film->duration * 0.75) / 10)) * 10;
         $time = explode(':', $validated['start_time']);
-        $seance->left = ((intval($time[0]) - 8) * 60 + intval($time[1])) * 0.75;
+        $left = intval(ceil((((intval($time[0]) - 8) * 60 + intval($time[1])) * 0.75) / 10)) * 10;
+        $fin = $width + $left;
+        $seances = Seance::where('hall_id', $hall_id)->get(); 
+
+        foreach($seances as $seance) {
+            if(($seance->left > $left && $seance->left < $fin) || ($seance->fin > $left && $seance->fin < $fin)) {
+                return  redirect()->route('admin.home')->with('error', 'Сеанс не может быть создан, пересекается с существующими');
+            }
+        }
+
+        $seance = new Seance;
+        $seance->hall_id = $hall_id;       
+        $seance->film_id = $film->id;        
+        $seance->start = $validated['start_time'];
+        $seance->width = $width;
+        $seance->left = $left;
+        $seance->fin = $fin;
         $seance->save();
         
-        return redirect()->route('admin.home');
+        return redirect()->route('admin.home')->with('success', 'Успешно добавлено в расписание');
     }
 
     /**

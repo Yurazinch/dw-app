@@ -17,20 +17,15 @@
                 </div>
             </div>       
         @endforeach        
-    @endif 
-    @script
-    <script>
-        $wire.on('loaded', () => {
-            Array.from(document.querySelectorAll('.conf-step__seances-timeline')).forEach(timeLine => {
-                console.log(timeLine.children);
-                Array.from(timeLine.children).forEach((child, i) => {
-                    if(i < timeLine.children.length - 1) {
-                        child.removeAttribute('wire:click');
-                        child.style.cursor = 'default';
-                    }
-                });
-            });
-        });
-    </script>
-    @endscript      
+    @endif     
+    @if(session('success'))
+        <script>
+            alert("{{ session('success') }}");
+        </script>
+    @endif
+    @if(session('error'))
+        <script>
+            alert("{{ session('error') }}");
+        </script>
+    @endif
 </div>

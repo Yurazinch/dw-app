@@ -20,6 +20,7 @@ class ShowTicket extends Component
     public $toCodeString;
     public $qrCodePath;
     public $boockingId;
+    public $qrcode;
 
 
     public function mount()
@@ -40,7 +41,7 @@ class ShowTicket extends Component
         $this->show = 'block';
         $booking = Booking::where('date', $ticket['date'])->orderByDesc('id')->first(); 
         $this->bookingId = $booking->id;            
-        $this->qrCodePath = "storage/$this->bookingId.png";      
+        $this->qrCodePath = "storage/$this->bookingId.svg";     
         $this->ticket = $ticket;
         $this->toCodeString = implode(';', $this->ticket);
         $this->qrCodeGenerate();
@@ -53,9 +54,8 @@ class ShowTicket extends Component
 
     public function qrCodeGenerate()
     {        
-        QrCode::format('png')
-        ->encoding('UTF-8')
-        ->size(300)
+        QrCode::encoding('UTF-8')
+        ->size(400)
         ->generate($this->toCodeString, public_path($this->qrCodePath));        
     }
 

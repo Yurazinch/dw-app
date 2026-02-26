@@ -4,12 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Hall;
 use App\Models\Place;
-use Illuminate\Http\Request;
+use App\Http\Requests\HallCreateRequest;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use Illuminate\Database\Eloquent\Collection;
-use App\Events\HallCreated;
 
 class HallController extends Controller
 {
@@ -24,14 +23,10 @@ class HallController extends Controller
     /**
      * Сохранить вновь созданный ресурс в хранилище.
      */
-    public function store(Request $request): RedirectResponse
+    public function store(HallCreateRequest $request): RedirectResponse
     {
-        $validated = $request->validate([
-            'name' => 'required|string|lowercase|unique:halls,name|max:25',
-        ]);
-        
         $hall = new Hall;
-        $hall->name = $validated['name'];     
+        $hall->name = $request->name;
         $hall->save();
         return redirect()->route('admin.home');
     }

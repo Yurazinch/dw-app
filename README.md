@@ -59,36 +59,11 @@ Zend Engine v4.4.10, Copyright (c) Zend Technologies.
 10. Активируйте символические ссылки.
     php artisan storage:link
 
-11. Установить Imagick
-
-*Для Linux*
-    - Установите библиотеки ImageMagick:
-    sudo apt update
-    sudo apt install imagemagick
-    - Установите пакет расширений PHP Imagick:
-    Используйте apt для установки расширения, соответствующего вашей конкретной версии PHP (например, php8.1-imagick).
-    sudo apt install php-imagick
-    или конкретно для определенной версии, например: sudo apt install php8.1-imagick
-    - Включите расширение (если оно не активируется автоматически):
-    Обычно установка включает расширение и добавляет параметр extension=imagick.so в соответствующий файл php.ini или в конфигурационный файл в папке mods-available.
-    - Перезапустите веб-сервер или PHP-FPM:
-    sudo service apache2 restart
-    or
-    sudo service nginx restart
-    or
-    sudo service php8.1-fpm restart
-
-*Для Windows*
-    - Перейти: http://pecl.php.net/package/imagick
-    - Выбрать последнюю стабильную версию, перейти по ссылке DLL
-    - Выбрать подходящий вариант (версия PHP, Thread Safe, Non Thread Safe, x86, x64)
-    - По выбранной ссылке скачать zip-архив, распаковать и копировать "php_imagick.dll" в папку расширений PHP: /php/ext/
-    Примечание: этот ZIP-архив также содержит DLL-файлы, которые во многих руководствах рекомендуется извлечь в папку расширений Apache. ЭТОГО ДЕЛАТЬ НЕ НУЖНО.
-    - Отредактируйте файл "php.ini" и разкомментируйте (или добавьте в раздел Dynamic Extensions):
-    extension=php_imagick.dll
-    Важно! Чтобы не возникало ошибок при проверке версии Imagick включите в php.ini директиву
-    imagick.skip_version_check=true (я прописал внизу extension где размещается директива php_imagick.dll)
-    - Перезапустите сервер.
+11. Пакет для генерации QR-кода использует библиотеку PHP GD (или Imagick) для обработки         изображений. Убедитесь, что расширение gd включено в вашем файле php.ini:
+    - Найдите файл php.ini для вашей среды (файлы для CLI и веб-сервера могут быть отдельными).
+    - Найдите строку extension=gd (или extension=php_gd.dll в Windows) и удалите точку с запятой (;) в начале строки, если она закомментирована.
+    - Перезапустите веб-сервер (Apache, Nginx и т. д.), чтобы изменения вступили в силу.
+Или подключите библиотеку Imagick: (https://pecl.php.net/package/imagick; https://www.php.net/manual/ru/imagick.setup.php).
 
 12. Запустите локальный сервер разработки:
     - Выполните команду:

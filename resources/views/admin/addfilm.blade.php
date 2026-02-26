@@ -32,22 +32,27 @@
                 <label class="conf-step__label conf-step__label-fullsize" for="name">
                   Название фильма
                   <input class="conf-step__input" type="text" placeholder="Например, &laquo;Гражданин Кейн&raquo;" name="name" required>
+                  <p style="color: red;">@error('name') {{ $message }} @enderror</p>
                 </label>
                 <label class="conf-step__label conf-step__label-fullsize" for="name">
                   Продолжительность фильма (мин.)
                   <input class="conf-step__input" type="text"  name="duration" data-last-value="" required>
+                  <p style="color: red;">@error('duration') {{ $message }} @enderror</p>
                 </label>
                 <label class="conf-step__label conf-step__label-fullsize" for="name">
                   Описание фильма
                   <textarea class="conf-step__input" type="text" name="description"  required></textarea>
+                  <p style="color: red;">@error('description') {{ $message }} @enderror</p>
                 </label>
                 <label class="conf-step__label conf-step__label-fullsize" for="name">
                   Страна
                   <input class="conf-step__input" type="text"  name="country" data-last-value="" required>
+                  <p style="color: red;">@error('country') {{ $message }} @enderror</p>
                 </label>
                 <label class="conf-step__label conf-step__label-fullsize" for="name">
                   Постер
                   <input class="conf-step__input" type="file"  name="poster" data-last-value="" required>
+                  <p style="color: red;">@error('poster') {{ $message }} @enderror</p>
                 </label>
               </div>
             </div>
