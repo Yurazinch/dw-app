@@ -17,7 +17,7 @@ class TimeLine extends Component
 
     public function boot()
     {
-        $this->seances = Seance::get();
+        $this->seances = Seance::orderBy('start')->get();
         $this->films = Film::get();
         $this->halls = Hall::get();
         $this->nextStart = '08:00';
@@ -27,6 +27,33 @@ class TimeLine extends Component
     public function loaded() 
     {
         $this->dispatch('loaded');
+    }
+
+    #[On('check-seance')]
+    public function checkseance() {
+        $fin = 0;
+        $crosseance = [];
+        foreach($this->halls as $hall) {
+            foreach($this->seances as $seance) {
+                if($hall->id === $seance->hall_id){
+                    if($fin === 0) {
+                        $fin = $seance->fin;
+                    } else {
+                        if($seance->left < $fin) {
+                            $crosseance[] = $seance->id;
+                        }
+                        $fin = $seance->fin;
+                    }
+                }
+            }
+        }
+        if(count($crosseance) > 0) {
+            foreach($crosseance as $item) {
+                Seance::where('id', $item)->delete();
+            }
+            $this->dispatch('seance-deleted');
+            $this->boot();
+        }
     }
 
     public function createform($id) {

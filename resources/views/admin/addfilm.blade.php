@@ -36,7 +36,7 @@
                 </label>
                 <label class="conf-step__label conf-step__label-fullsize" for="name">
                   Продолжительность фильма (мин.)
-                  <input class="conf-step__input" type="text"  name="duration" data-last-value="" required>
+                  <input class="conf-step__input" type="text" pattern="^[0-9]*$" oninput="this.value = this.value.replace(/[^0-9]/g, '');" name="duration" data-last-value="" required>
                   <p style="color: red;">@error('duration') {{ $message }} @enderror</p>
                 </label>
                 <label class="conf-step__label conf-step__label-fullsize" for="name">

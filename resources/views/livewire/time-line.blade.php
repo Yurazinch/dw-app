@@ -16,16 +16,23 @@
                     @endforeach                   
                 </div>
             </div>       
-        @endforeach        
-    @endif     
-    @if(session('success'))
-        <script>
-            alert("{{ session('success') }}");
-        </script>
+        @endforeach
+        @script
+            <script>                
+                Livewire.dispatch('check-seance');
+            </script>
+        @endscript       
     @endif
     @if(session('error'))
         <script>
             alert("{{ session('error') }}");
         </script>
     @endif
+    @script
+    <script>        
+        $wire.on('seance-deleted', () => {
+            alert('Обнаруженные пересекающиеся сеансы удалены');
+        });
+    </script>
+    @endscript
 </div>

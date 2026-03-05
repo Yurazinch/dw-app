@@ -29,6 +29,7 @@ class StoreSeanceRequest extends FormRequest
             'seances.*.start' => ['required', Rule::date()->format("H:i")],
             'seances.*.width' => 'required|integer|min:0',
             'seances.*.left' => 'required|integer|min:0',
+            'seances.*.fin' => 'required|integer|min:0',
         ];
     }
 }
