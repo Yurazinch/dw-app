@@ -153,8 +153,9 @@ Array.from(timeLines).forEach(timeLine => timeLine.addEventListener('drop', (e) 
 	const film = e.dataTransfer.getData('text').split(',');	
 	const filmName = film[0];
 	const filmDuration = film[1].trim().split(' ')[0];
+	console.log(filmDuration);
 	const draggableElement = document.getElementById('id');
-	let width = Math.ceil(parseInt(filmDuration) * 0.75);
+	let width = Math.round((parseInt(filmDuration) * 0.75) / 10) * 10;
 	const hallName = e.target.previousElementSibling.textContent;
 	function getStart() {
 		if(existEls.length === 0) {

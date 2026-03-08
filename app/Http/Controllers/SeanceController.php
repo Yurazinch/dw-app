@@ -24,9 +24,9 @@ class SeanceController extends Controller
 
         $film = Film::where('name', $validated['film'])->firstOrFail();
         $hall_id = Hall::where('name', $validated['hall'])->value('id');
-        $width = intval(ceil(($film->duration * 0.75) / 10)) * 10;
+        $width = round($film->duration * 0.75, -1, PHP_ROUND_HALF_UP);
         $time = explode(':', $validated['start_time']);
-        $left = intval(ceil((((intval($time[0]) - 8) * 60 + intval($time[1])) * 0.75) / 10)) * 10;
+        $left = round((((intval($time[0]) - 8) * 60 + intval($time[1])) * 0.75), -1, PHP_ROUND_HALF_UP);
         $fin = $width + $left;
         $seances = Seance::where('hall_id', $hall_id)->get(); 
 
