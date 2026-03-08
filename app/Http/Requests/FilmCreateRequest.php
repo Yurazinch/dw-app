@@ -14,7 +14,8 @@ class FilmCreateRequest extends FormRequest
 
     protected function prepareForValidation(): void
     {
-        $this->merge([
+        $this->name = Str::replace(',', '', $this->name);
+        $this->merge([            
             'name' => Str::title($this->name),
         ]);
     }
