@@ -76,9 +76,9 @@
       <div class="conf-step__wrapper">
         <p class="conf-step__paragraph">
           <a href="{{ route('film.create') }}"><button class="conf-step__button conf-step__button-accent">Добавить фильм</button></a>
-        </p>
-        <p class="conf-step__legend">Чтобы добавить сеанс, перетяните фильм на таймлайн нужного зала, или кликните на название зала</p>
-        <livewire:film-list />        
+        </p>        
+        <livewire:film-list /> 
+        <p class="conf-step__paragraph">Чтобы добавить сеанс, перетяните фильм на таймлайн нужного зала, или кликните на название зала</p>       
         <div class="conf-step__seances">                 
           <livewire:time-line />
         </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Film;
+use App\Models\Seance;
 use App\Http\Requests\FilmCreateRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Storage;
@@ -64,9 +65,13 @@ class FilmController extends Controller
      */
     public function destroy($id)
     {
-        $poster = Film::where('id', $id)->value('poster');
-        Storage::delete('storage/$poster');
-        $film = Film::where('id', $id)->delete();
-        return redirect()->route('admin.home');
+        if(count(Seance::where('film_id', $id)->get()) > 0) {
+            return redirect()->route('admin.home')->with('error', 'Фильм не может быть удален, добавлен в сеансы');
+        } else {
+            $poster = Film::where('id', $id)->value('poster');
+            Storage::delete('storage/$poster');
+            $film = Film::where('id', $id)->delete();
+            return redirect()->route('admin.home');
+        }
     }
 }

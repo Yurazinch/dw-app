@@ -45,7 +45,7 @@ class SeanceController extends Controller
         $seance->fin = $fin;
         $seance->save();
         
-        return redirect()->route('admin.home')->with('success', 'Успешно добавлено в расписание');
+        return redirect()->route('admin.home');
     }
 
     /**
