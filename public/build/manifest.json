@@ -1,0 +1,110 @@
+{
+  "resources/css/normalize-admin.css": {
+    "file": "assets/normalize-admin-DUuYFgeq.css",
+    "src": "resources/css/normalize-admin.css",
+    "isEntry": true,
+    "names": [
+      "normalize-admin.css"
+    ]
+  },
+  "resources/css/normalize.css": {
+    "file": "assets/normalize-A4UbEKSs.css",
+    "src": "resources/css/normalize.css",
+    "isEntry": true,
+    "names": [
+      "normalize.css"
+    ]
+  },
+  "resources/css/styles-admin.css": {
+    "file": "assets/styles-admin-DRYX_rGi.css",
+    "src": "resources/css/styles-admin.css",
+    "isEntry": true,
+    "names": [
+      "styles-admin.css"
+    ]
+  },
+  "resources/css/styles-admin.scss": {
+    "file": "assets/styles-admin-BAuBWn-q.css",
+    "src": "resources/css/styles-admin.scss",
+    "isEntry": true,
+    "names": [
+      "styles-admin.css"
+    ]
+  },
+  "resources/css/styles.css": {
+    "file": "assets/styles-BB7NJ4Ls.css",
+    "src": "resources/css/styles.css",
+    "isEntry": true,
+    "names": [
+      "styles.css"
+    ]
+  },
+  "resources/css/styles.scss": {
+    "file": "assets/styles-C2yjwl_x.css",
+    "src": "resources/css/styles.scss",
+    "isEntry": true,
+    "names": [
+      "styles.css"
+    ]
+  },
+  "resources/js/accordeon.js": {
+    "file": "assets/accordeon-ByQrFGIg.js",
+    "name": "accordeon",
+    "src": "resources/js/accordeon.js",
+    "isEntry": true
+  },
+  "resources/js/datenavs.js": {
+    "file": "assets/datenavs-BawSoZOn.js",
+    "name": "datenavs",
+    "src": "resources/js/datenavs.js",
+    "isEntry": true
+  },
+  "resources/js/placestatus.js": {
+    "file": "assets/placestatus-DmQYx1cp.js",
+    "name": "placestatus",
+    "src": "resources/js/placestatus.js",
+    "isEntry": true
+  },
+  "resources/js/takechair.js": {
+    "file": "assets/takechair-3m_UO5Bz.js",
+    "name": "takechair",
+    "src": "resources/js/takechair.js",
+    "isEntry": true
+  },
+  "storage/app/images/background-admin.jpg": {
+    "file": "assets/background-admin-TJ82qk5p.jpg",
+    "src": "storage/app/images/background-admin.jpg"
+  },
+  "storage/app/images/background.jpg": {
+    "file": "assets/background-LKY6EnaP.jpg",
+    "src": "storage/app/images/background.jpg"
+  },
+  "storage/app/images/border-bottom.png": {
+    "file": "assets/border-bottom-CjedIAAO.png",
+    "src": "storage/app/images/border-bottom.png"
+  },
+  "storage/app/images/border-top.png": {
+    "file": "assets/border-top-loN9jYuy.png",
+    "src": "storage/app/images/border-top.png"
+  },
+  "storage/app/images/green-pattern-admin.png": {
+    "file": "assets/green-pattern-admin-CFlxa3sm.png",
+    "src": "storage/app/images/green-pattern-admin.png"
+  },
+  "storage/app/images/hint.png": {
+    "file": "assets/hint-Daksk9Gw.png",
+    "src": "storage/app/images/hint.png"
+  },
+  "storage/app/images/screen.png": {
+    "file": "assets/screen-Cn9E3Bih.png",
+    "src": "storage/app/images/screen.png"
+  },
+  "storage/app/images/switch-admin.png": {
+    "file": "assets/switch-admin-CNJ8XIe5.png",
+    "src": "storage/app/images/switch-admin.png"
+  },
+  "storage/app/images/trash-sprite-admin.png": {
+    "file": "assets/trash-sprite-admin-DEEEUxM7.png",
+    "src": "storage/app/images/trash-sprite-admin.png"
+  }
+}

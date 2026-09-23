@@ -1,0 +1,1 @@
+const s=Array.from(document.querySelectorAll(".conf-step__header"));s.forEach(e=>e.addEventListener("click",()=>{e.classList.toggle("conf-step__header_closed"),e.classList.toggle("conf-step__header_opened")}));
